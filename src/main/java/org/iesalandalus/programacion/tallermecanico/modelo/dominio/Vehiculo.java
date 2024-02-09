@@ -50,7 +50,6 @@ public record Vehiculo(String marca, String modelo, String matricula) {
         Vehiculo vehiculo = (Vehiculo) o;
         return Objects.equals(matricula, vehiculo.matricula);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(matricula);
