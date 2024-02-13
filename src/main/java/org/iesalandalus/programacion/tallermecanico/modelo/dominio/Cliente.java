@@ -21,9 +21,9 @@ public class Cliente {
 
     public Cliente(Cliente cliente){
         Objects.requireNonNull(cliente, "No es posible copiar un cliente nulo.");
-        setNombre(cliente.getNombre());
-        setDni(cliente.getDni());
-        setTelefono(cliente.getTelefono());
+        this.nombre = cliente.getNombre();
+        this.dni = cliente.getDni();
+        this.telefono = cliente.getTelefono();
     }
 
     public void setNombre(String nombre) {
