@@ -15,14 +15,14 @@ public class Revision {
     private static final float PRECIO_DIA = 10;
     private static final float PRECIO_MATERIAL = 1.50f;
 
-    public static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy") ;
+    public static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private LocalDate fechaInicio;
 
     private LocalDate fechaFin;
     private int horas = 0;
-    private float precioMaterial= 0;
+    private float precioMaterial = 0;
 
-    public Revision(Cliente cliente, Vehiculo vehiculo, LocalDate fechaInicio){
+    public Revision(Cliente cliente, Vehiculo vehiculo, LocalDate fechaInicio) {
         setCliente(cliente);
         setVehiculo(vehiculo);
         setFechaInicio(fechaInicio);
@@ -30,8 +30,8 @@ public class Revision {
     }
 
 
-    public Revision(Revision revision){
-        Objects.requireNonNull(revision,"La revisión no puede ser nula.");
+    public Revision(Revision revision) {
+        Objects.requireNonNull(revision, "La revisión no puede ser nula.");
         setCliente(new Cliente(revision.cliente));
         setVehiculo(revision.vehiculo);
         setFechaInicio(revision.fechaInicio);
@@ -39,19 +39,19 @@ public class Revision {
         horas += revision.getHoras();
         precioMaterial += revision.getPrecioMaterial();
     }
-    public Cliente getCliente(){
+
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public Vehiculo getVehiculo(){
+    public Vehiculo getVehiculo() {
         return vehiculo;
     }
 
-    public LocalDate getFechaInicio(){
+    public LocalDate getFechaInicio() {
 
         return fechaInicio;
     }
-
 
 
     private void setCliente(Cliente cliente) {
@@ -59,43 +59,42 @@ public class Revision {
         this.cliente = cliente;
     }
 
-    
+
     private void setVehiculo(Vehiculo vehiculo) {
         Objects.requireNonNull(vehiculo, "El vehículo no puede ser nulo.");
         this.vehiculo = vehiculo;
     }
 
-    
+
     private void setFechaInicio(LocalDate fechaInicio) {
         Objects.requireNonNull(fechaInicio, "La fecha de inicio no puede ser nula.");
-        if(!fechaInicio.isBefore(LocalDate.now())){
+        if (!fechaInicio.isBefore(LocalDate.now())) {
             throw new IllegalArgumentException("La fecha de inicio no puede ser futura.");
         }
         this.fechaInicio = fechaInicio;
     }
 
 
-
-    private void setFechaFin(LocalDate fechaFin){
-        Objects.requireNonNull(fechaFin,"La fecha no puede ser nula.");
+    private void setFechaFin(LocalDate fechaFin) {
+        Objects.requireNonNull(fechaFin, "La fecha no puede ser nula.");
         this.fechaFin = fechaFin;
     }
 
-    public int getHoras(){
+    public int getHoras() {
         return horas;
     }
 
     public void anadirHoras(int horas) throws OperationNotSupportedException {
-        if(estaCerrada()){
+        if (estaCerrada()) {
             throw new OperationNotSupportedException("No se puede añadir horas, ya que la revisión está cerrada.");
         }
-        if(horas <= 0){
+        if (horas <= 0) {
             throw new IllegalArgumentException("Las horas a añadir deben ser mayores que cero.");
         }
         this.horas += horas;
     }
 
-    public float getPrecioMaterial(){
+    public float getPrecioMaterial() {
         return precioMaterial;
     }
 
@@ -105,55 +104,51 @@ public class Revision {
 
 
     public void anadirPrecioMaterial(float precioMaterial) throws OperationNotSupportedException {
-        if(estaCerrada()){
+        if (estaCerrada()) {
             throw new OperationNotSupportedException("No se puede añadir precio del material, ya que la revisión está cerrada.");
         }
-        if(precioMaterial <= 0){
+        if (precioMaterial <= 0) {
             throw new IllegalArgumentException("El precio del material a añadir debe ser mayor que cero.");
         }
         this.precioMaterial += precioMaterial;
     }
 
-    public boolean estaCerrada(){
+    public boolean estaCerrada() {
         boolean condicion = false;
-        if(fechaFin != null){
+        if (fechaFin != null) {
             condicion = true;
         }
         return condicion;
     }
 
     public void cerrar(LocalDate fechaFin) throws OperationNotSupportedException {
-        Objects.requireNonNull(fechaFin,"La fecha de fin no puede ser nula.");
-        if(estaCerrada()){
+        Objects.requireNonNull(fechaFin, "La fecha de fin no puede ser nula.");
+        if (estaCerrada()) {
             throw new OperationNotSupportedException("La revisión ya está cerrada.");
         }
-        if(fechaFin.isBefore(fechaInicio)){
+        if (fechaFin.isBefore(fechaInicio)) {
             throw new IllegalArgumentException("La fecha de fin no puede ser anterior a la fecha de inicio.");
         }
-        if(fechaFin.isAfter(LocalDate.now())){
+        if (fechaFin.isAfter(LocalDate.now())) {
             throw new IllegalArgumentException("La fecha de fin no puede ser futura.");
         }
         setFechaFin(fechaFin);
     }
 
-    public float getPrecio(){
-/*        float precioDia = 0;
-        if(getHoras() > 0){
-            precioDia = (getDias() * PRECIO_DIA);
-        }*/
+    public float getPrecio() {
         float precio = (getHoras() * PRECIO_HORA) + (getDias() * PRECIO_DIA) + (getPrecioMaterial() * PRECIO_MATERIAL);
         return precio;
     }
 
-    private float getDias(){
+    private float getDias() {
         float dias;
-        if(fechaFin == null){
+        if (fechaFin == null) {
             dias = fechaInicio.until(LocalDate.now()).getDays();
-        }else{
+        } else {
             dias = fechaInicio.until(fechaFin).getDays();
         }
         return dias;
-   }
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -171,10 +166,10 @@ public class Revision {
     @Override
     public String toString() {
         String salida;
-        if(getFechaFin() == null){
-            salida = String.format("%s - %s (%s) - %s %s - %s: (%s - ), %d horas, %.2f € en material",cliente.getNombre(),cliente.getDni(),cliente.getTelefono(),vehiculo.marca(), vehiculo.modelo(), vehiculo.matricula(),getFechaInicio().format(FORMATO_FECHA), getHoras(), getPrecioMaterial());
-        }else{
-            salida = String.format("%s - %s (%s) - %s %s - %s: (%s - %s), %d horas, %.2f € en material, %.2f € total",cliente.getNombre(),cliente.getDni(),cliente.getTelefono(),vehiculo.marca(), vehiculo.modelo(), vehiculo.matricula(),getFechaInicio().format(FORMATO_FECHA),getFechaFin().format(FORMATO_FECHA) , getHoras(), getPrecioMaterial(), getPrecio());
+        if (getFechaFin() == null) {
+            salida = String.format("%s - %s (%s) - %s %s - %s: (%s - ), %d horas, %.2f € en material", cliente.getNombre(), cliente.getDni(), cliente.getTelefono(), vehiculo.marca(), vehiculo.modelo(), vehiculo.matricula(), getFechaInicio().format(FORMATO_FECHA), getHoras(), getPrecioMaterial());
+        } else {
+            salida = String.format("%s - %s (%s) - %s %s - %s: (%s - %s), %d horas, %.2f € en material, %.2f € total", cliente.getNombre(), cliente.getDni(), cliente.getTelefono(), vehiculo.marca(), vehiculo.modelo(), vehiculo.matricula(), getFechaInicio().format(FORMATO_FECHA), getFechaFin().format(FORMATO_FECHA), getHoras(), getPrecioMaterial(), getPrecio());
         }
         return salida;
     }
