@@ -10,30 +10,34 @@ public enum Opcion {
     LISTAR_CLIENTES(4, "Listar clientes"),
     MODIFICAR_CLIENTE(5, "Modificar cliente"),
     INSERTAR_VEHICULO(6, "Insertar vehículo"),
-    BUSCAR_REVISION(7, "Buscar revisión"),
-    BORRAR_REVISION(8, "Borrar revisión"),
-    LISTAR_REVISIONES(9, "Listar revisiones"),
-    LISTAR_REVISIONES_CLIENTE(10, "Listar revisiones de cliente"),
-    LISTAR_REVISIONES_VEHICULO(11, "Listar revisiones de vehículo"),
-    ANADIR_HORAS_REVISION(12, "Añadir horas a revisión"),
-    ANADIR_PRECIO_MATERIAL_REVISION(13, "Añadir precio de material a revisión"),
-    CERRAR_REVISION(14, "Cerrar revisión"),
-    SALIR(15, "Salir");
+    BUSCAR_VEHICULO(7, "Buscar vehículo"),
+    BORRAR_VEHICULO(8, "Borrar vehículo"),
+    LISTAR_VEHICULOS(9, "Listar vehiculos"),
+    INSERTAR_REVISION(10, "Insertar revisión"),
+    BUSCAR_REVISION(11, "Buscar revisión"),
+    BORRAR_REVISION(12, "Borrar revisión"),
+    LISTAR_REVISIONES(13, "Listar revisiones"),
+    LISTAR_REVISIONES_CLIENTE(14, "Listar revisiones de cliente"),
+    LISTAR_REVISIONES_VEHICULO(15, "Listar revisiones de vehículo"),
+    ANADIR_HORAS_REVISION(16, "Añadir horas a revisión"),
+    ANADIR_PRECIO_MATERIAL_REVISION(17, "Añadir precio de material a revisión"),
+    CERRAR_REVISION(18, "Cerrar revisión"),
+    SALIR(19, "Salir");
 
-    private static Map<Integer, String> opciones = new TreeMap<>();
+    private final static Map<Integer, Opcion> opciones = new TreeMap<>();
 
-    private  int numeroOpcion;
+    private int numeroOpcion;
 
     private String mensaje;
 
-    private  Opcion(int numeroOpcion, String mensaje) {
+    private Opcion(int numeroOpcion, String mensaje) {
         this.numeroOpcion = numeroOpcion;
         this.mensaje = mensaje;
     }
 
     static {
         for (Opcion opcion : Opcion.values()) {
-            opciones.put(opcion.numeroOpcion, opcion.mensaje);
+            opciones.put(opcion.numeroOpcion, opcion);
         }
     }
 
@@ -45,7 +49,11 @@ public enum Opcion {
         if (!esValida(numeroOpcion)) {
             throw new IllegalArgumentException("La opción es incorrecta");
         }
-        return Opcion.get(numeroOpcion);
+        return opciones.get(numeroOpcion);
     }
 
+    @Override
+    public String toString() {
+        return String.format("[%d] - %s", this.numeroOpcion, this.mensaje);
+    }
 }
