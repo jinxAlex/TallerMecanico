@@ -137,6 +137,10 @@ public class Revision {
     }
 
     public float getPrecio(){
+/*        float precioDia = 0;
+        if(getHoras() > 0){
+            precioDia = (getDias() * PRECIO_DIA);
+        }*/
         float precio = (getHoras() * PRECIO_HORA) + (getDias() * PRECIO_DIA) + (getPrecioMaterial() * PRECIO_MATERIAL);
         return precio;
     }
