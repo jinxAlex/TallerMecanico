@@ -2,10 +2,9 @@ package org.iesalandalus.programacion.tallermecanico.modelo.dominio;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+
 import java.util.Objects;
 
-import javax.management.relation.RelationService;
 import javax.naming.OperationNotSupportedException;
 
 public class Revision {
@@ -35,7 +34,7 @@ public class Revision {
         setCliente(new Cliente(revision.cliente));
         setVehiculo(revision.vehiculo);
         setFechaInicio(revision.fechaInicio);
-        setFechaFin(revision.fechaFin);
+        fechaFin = revision.fechaFin;
         horas += revision.getHoras();
         precioMaterial += revision.getPrecioMaterial();
     }
@@ -59,13 +58,13 @@ public class Revision {
         this.cliente = cliente;
     }
 
-    
+
     private void setVehiculo(Vehiculo vehiculo) {
         Objects.requireNonNull(vehiculo, "El vehículo no puede ser nulo.");
         this.vehiculo = vehiculo;
     }
 
-    
+
     private void setFechaInicio(LocalDate fechaInicio) {
         Objects.requireNonNull(fechaInicio, "La fecha de inicio no puede ser nula.");
         if(!fechaInicio.isBefore(LocalDate.now())){
@@ -137,10 +136,6 @@ public class Revision {
     }
 
     public float getPrecio(){
-/*        float precioDia = 0;
-        if(getHoras() > 0){
-            precioDia = (getDias() * PRECIO_DIA);
-        }*/
         float precio = (getHoras() * PRECIO_HORA) + (getDias() * PRECIO_DIA) + (getPrecioMaterial() * PRECIO_MATERIAL);
         return precio;
     }
@@ -153,7 +148,7 @@ public class Revision {
             dias = fechaInicio.until(fechaFin).getDays();
         }
         return dias;
-   }
+    }
 
     @Override
     public boolean equals(Object o) {
