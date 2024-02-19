@@ -6,6 +6,7 @@ import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Revision;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 
 public class Consola {
@@ -51,16 +52,20 @@ public class Consola {
     private static LocalDate leerFecha(String mensaje) {
         System.out.println(mensaje);
         LocalDate fecha = null;
-        do {
-            System.out.print("Introduce el día: ");
-            Integer dia = Entrada.entero();
-            System.out.print("Introduce el mes: ");
-            Integer mes = Entrada.entero();
-            System.out.print("Introduce el año: ");
-            Integer anio = Entrada.entero();
+        while (fecha == null) {
+            try {
+                System.out.print("Introduce el día: ");
+                Integer dia = Entrada.entero();
+                System.out.print("Introduce el mes: ");
+                Integer mes = Entrada.entero();
+                System.out.print("Introduce el año: ");
+                Integer anio = Entrada.entero();
 
-            fecha = LocalDate.of(anio, mes, dia);
-        } while (fecha == null);
+                fecha = LocalDate.of(anio, mes, dia);
+            } catch (DateTimeException e) {
+                System.out.println("Fecha no válida. Por favor, ingresa una fecha válida.");
+            }
+        }
         return fecha;
     }
 
