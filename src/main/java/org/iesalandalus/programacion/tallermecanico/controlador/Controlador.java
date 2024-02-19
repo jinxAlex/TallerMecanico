@@ -38,7 +38,7 @@ public class Controlador {
         try {
             modelo.insertar(cliente);
         } catch (OperationNotSupportedException e) {
-            System.out.println(e);
+            System.out.printf("ERROR: %s", e.getMessage());
         }
     }
 
@@ -54,7 +54,7 @@ public class Controlador {
         try {
             modelo.insertar(revision);
         } catch (OperationNotSupportedException e) {
-            System.out.println(e);
+            System.out.printf("ERROR: %s", e.getMessage());
         }
     }
 
@@ -75,7 +75,7 @@ public class Controlador {
         try {
             esModificado = modelo.modificar(cliente, nombre, telefono);
         } catch (OperationNotSupportedException e) {
-            System.out.println(e);
+            System.out.printf("ERROR: %s", e.getMessage());
         }
         return esModificado;
     }
@@ -84,7 +84,7 @@ public class Controlador {
         try {
             modelo.anadirHoras(revision, horas);
         } catch (OperationNotSupportedException e) {
-            System.out.println(e);
+            System.out.printf("ERROR: %s", e.getMessage());
         }
     }
 
@@ -92,7 +92,7 @@ public class Controlador {
         try {
             modelo.anadirPrecioMaterial(revision, precioMaterial);
         } catch (OperationNotSupportedException e) {
-            System.out.println(e);
+            System.out.printf("ERROR: %s", e.getMessage());
         }
     }
 
@@ -100,7 +100,7 @@ public class Controlador {
         try {
             modelo.cerrar(revision, fechaFin);
         } catch (OperationNotSupportedException e) {
-            System.out.println(e);
+            System.out.printf("ERROR: %s", e.getMessage());
         }
     }
 
@@ -108,7 +108,7 @@ public class Controlador {
         try {
             modelo.borrar(cliente);
         } catch (OperationNotSupportedException e) {
-            System.out.println(e);
+            System.out.printf("ERROR: %s", e.getMessage());
         }
     }
 
@@ -116,7 +116,7 @@ public class Controlador {
         try {
             modelo.borrar(vehiculo);
         } catch (OperationNotSupportedException e) {
-            System.out.println(e);
+            System.out.printf("ERROR: %s", e.getMessage());
         }
     }
 
@@ -124,7 +124,7 @@ public class Controlador {
         try {
             modelo.borrar(revision);
         } catch (OperationNotSupportedException e) {
-            System.out.println(e);
+            System.out.printf("ERROR: %s", e.getMessage());
         }
     }
 
