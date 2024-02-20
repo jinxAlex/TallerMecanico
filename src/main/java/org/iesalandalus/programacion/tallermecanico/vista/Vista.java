@@ -51,69 +51,129 @@ public class Vista {
 
     private void insertarCliente() {
         Consola.mostrarCabecera("Insertar cliente");
-        controlador.insertar(Consola.leerCliente());
+        try{
+            controlador.insertar(Consola.leerCliente());
+            System.out.println("El usuario ha sido insertado con éxito.");
+        }catch (IllegalArgumentException e){
+            System.out.printf("ERROR: %s", e.getMessage());
+        }
     }
 
     private void insertarVehiculo() {
         Consola.mostrarCabecera("Insertar vehículo");
-        controlador.insertar(Consola.leerVehiculo());
+        try{
+            controlador.insertar(Consola.leerVehiculo());
+            System.out.println("El vehiculo ha sido insertado con éxito.");
+        }catch (IllegalArgumentException e){
+            System.out.printf("ERROR: %s", e.getMessage());
+        }
     }
 
     private void insertarRevision() {
         Consola.mostrarCabecera("Insertar revisión");
-        controlador.insertar(Consola.leerRevision());
+        try{
+            controlador.insertar(Consola.leerRevision());
+            System.out.println("La revisión ha sido insertada con éxito.");
+        }catch (IllegalArgumentException e){
+            System.out.printf("ERROR: %s", e.getMessage());
+        }
     }
 
     private void buscarCliente() {
         Consola.mostrarCabecera("Buscar cliente");
-        System.out.println(controlador.buscar(Consola.leerClienteDni()));
-
+        try{
+            System.out.println(controlador.buscar(Consola.leerClienteDni()));
+        }catch (IllegalArgumentException e){
+            System.out.printf("ERROR: %s", e.getMessage());
+        }
     }
 
     private void buscarVehiculo() {
         Consola.mostrarCabecera("Buscar vehículo");
-        System.out.println(controlador.buscar(Consola.leerVehiculoMatricula()));
+        try{
+            System.out.println(controlador.buscar(Consola.leerVehiculoMatricula()));
+        }catch (IllegalArgumentException e){
+            System.out.printf("ERROR: %s", e.getMessage());
+        }
     }
 
     private void buscarRevision() {
         Consola.mostrarCabecera("Buscar revisión");
-        System.out.println(controlador.buscar(Consola.leerRevision()));
+        try{
+            System.out.println(controlador.buscar(Consola.leerRevision()));
+        }catch (IllegalArgumentException e){
+            System.out.printf("ERROR: %s", e.getMessage());
+        }
     }
 
     private void modificarCliente() {
         Consola.mostrarCabecera("Modificar el cliente");
-        controlador.modificar(Consola.leerClienteDni(), Consola.leerNuevoNombre(), Consola.leerNuevoTelefono());
+        try{
+            controlador.modificar(Consola.leerClienteDni(), Consola.leerNuevoNombre(), Consola.leerNuevoTelefono());
+            System.out.println("El cliente ha sido modificado con éxito.");
+        }catch (IllegalArgumentException e){
+            System.out.printf("ERROR: %s", e.getMessage());
+        }
     }
 
     private void anadirHoras() {
         Consola.mostrarCabecera("Añadir horas");
-        controlador.anadirHoras(Consola.leerRevision(), Consola.leerHoras());
-
+        try{
+            controlador.anadirHoras(Consola.leerRevision(), Consola.leerHoras());
+            System.out.println("Las horas han sido añadidas perfectamente a la revisión.");
+        }catch (IllegalArgumentException e){
+            System.out.printf("ERROR: %s", e.getMessage());
+        }
     }
 
     private void anadirPrecioMaterial() {
         Consola.mostrarCabecera("Añadir precio del material");
-        controlador.anadirPrecioMaterial(Consola.leerRevision(), Consola.leerPrecioMaterial());
+        try{
+            controlador.anadirPrecioMaterial(Consola.leerRevision(), Consola.leerPrecioMaterial());
+            System.out.println("El precio del material ha sido añadido correctamente.");
+        }catch (IllegalArgumentException e){
+            System.out.printf("ERROR: %s", e.getMessage());
+        }
     }
 
     private void cerrarRevision() {
         Consola.mostrarCabecera("Cerrar revisión");
-        controlador.cerrar(Consola.leerRevision(), Consola.leerFechaCierre());
+        try{
+            controlador.cerrar(Consola.leerRevision(), Consola.leerFechaCierre());
+            System.out.println("La revisión ha sido cerrada correctamente.");
+        }catch (IllegalArgumentException e){
+            System.out.printf("ERROR: %s", e.getMessage());
+        }
     }
 
     private void borrarCliente() {
         Consola.mostrarCabecera("Borrar cliente");
-        controlador.borrar(Consola.leerClienteDni());
+        try{
+            controlador.borrar(Consola.leerClienteDni());
+            System.out.println("Se ha borrado el cliente.");
+        }catch (IllegalArgumentException e){
+            System.out.printf("ERROR: %s", e.getMessage());
+        }
     }
 
     private void borrarVehiculo() {
         Consola.mostrarCabecera("Borrar vehículo");
-        controlador.borrar(Consola.leerVehiculoMatricula());
+        try{
+            controlador.borrar(Consola.leerVehiculoMatricula());
+            System.out.println("Se ha borrado el vehiculo.");
+        }catch (IllegalArgumentException e){
+            System.out.printf("ERROR: %s", e.getMessage());
+        }
     }
 
     private void borrarRevision() {
         Consola.mostrarCabecera("Borrar revisión");
-        controlador.borrar(Consola.leerRevision());
+        try{
+            controlador.borrar(Consola.leerRevision());
+            System.out.println("Se ha borrado la revisión.");
+        }catch (IllegalArgumentException e){
+            System.out.printf("ERROR: %s", e.getMessage());
+        }
     }
 
     private void listarClientes() {
@@ -133,12 +193,20 @@ public class Vista {
 
     private void listarRevisionesCliente() {
         Consola.mostrarCabecera("Listar revisiones de un cliente");
-        System.out.println(controlador.getRevisiones(Consola.leerClienteDni()));
+        try{
+            System.out.println(controlador.getRevisiones(Consola.leerClienteDni()));
+        }catch (IllegalArgumentException e){
+            System.out.printf("ERROR: %s", e.getMessage());
+        }
     }
 
     private void listarRevisionesVehiculo() {
         Consola.mostrarCabecera("Listar revisiones de un vehículo");
-        System.out.println(controlador.getRevisiones(Consola.leerVehiculoMatricula()));
+        try{
+            System.out.println(controlador.getRevisiones(Consola.leerVehiculoMatricula()));
+        }catch (IllegalArgumentException e){
+            System.out.printf("ERROR: %s", e.getMessage());
+        }
     }
 
     private void salir() {
@@ -146,3 +214,4 @@ public class Vista {
         terminar();
     }
 }
+
