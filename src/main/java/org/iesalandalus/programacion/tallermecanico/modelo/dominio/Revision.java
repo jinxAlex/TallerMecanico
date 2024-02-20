@@ -136,16 +136,13 @@ public class Revision {
     }
 
     public float getPrecio(){
-        float precio = (getHoras() * PRECIO_HORA) + (getDias() * PRECIO_DIA) + (getPrecioMaterial() * PRECIO_MATERIAL);
-        return precio;
+        return (getHoras() * PRECIO_HORA) + (getDias() * PRECIO_DIA) + (getPrecioMaterial() * PRECIO_MATERIAL);
     }
 
     private float getDias(){
-        float dias;
-        if(fechaFin == null){
-            dias = fechaInicio.until(LocalDate.now()).getDays();
-        }else{
-            dias = fechaInicio.until(fechaFin).getDays();
+        float dias = 0;
+        if(fechaFin != null){
+            dias = fechaInicio.until(getFechaFin()).getDays();
         }
         return dias;
     }
