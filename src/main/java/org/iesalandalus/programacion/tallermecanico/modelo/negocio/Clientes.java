@@ -7,13 +7,13 @@ import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente;
 import javax.naming.OperationNotSupportedException;
 
 public class Clientes {
-    private List<Cliente> coleccionClientes;
+    private final List<Cliente> coleccionClientes;
 
     public Clientes() {
         coleccionClientes = new ArrayList<>();
     }
 
-    public ArrayList<Cliente> get() {
+    public List<Cliente> get() {
         return new ArrayList<>(coleccionClientes);
     }
 
@@ -26,26 +26,19 @@ public class Clientes {
     }
 
     public boolean modificar(Cliente cliente, String nombre, String telefono) throws OperationNotSupportedException {
-        boolean haSidoModificado = false;
         Objects.requireNonNull(cliente, "No se puede modificar un cliente nulo.");
-        if (!coleccionClientes.contains(cliente)) {
+        Cliente clienteBuscado = buscar(cliente);
+        if (clienteBuscado == null) {
             throw new OperationNotSupportedException("No existe ningún cliente con ese DNI.");
         }
-        for (Cliente clienteActual : coleccionClientes) {
-            if (clienteActual.equals(buscar(cliente))) {
-                if (nombre != null) {
-                    if (!nombre.isBlank()) {
-                        clienteActual.setNombre(nombre);
-                        haSidoModificado = true;
-                    }
-                }
-                if (telefono != null) {
-                    if (!telefono.isBlank()) {
-                        clienteActual.setTelefono(telefono);
-                        haSidoModificado = true;
-                    }
-                }
-            }
+        boolean haSidoModificado = false;
+        if(nombre != null && !nombre.isBlank()){
+            clienteBuscado.setNombre(nombre);
+            haSidoModificado = true;
+        }
+        if(telefono != null && !telefono.isBlank()){
+            clienteBuscado.setTelefono(telefono);
+            haSidoModificado = true;
         }
         return haSidoModificado;
     }
@@ -53,8 +46,6 @@ public class Clientes {
     public Cliente buscar(Cliente cliente) {
         Objects.requireNonNull(cliente, "No se puede buscar un cliente nulo.");
         int indice = coleccionClientes.indexOf(cliente);
-
-
         return (indice == -1) ? null : coleccionClientes.get(indice);
     }
 
@@ -63,12 +54,6 @@ public class Clientes {
         if (!coleccionClientes.contains(cliente)) {
             throw new OperationNotSupportedException("No existe ningún cliente con ese DNI.");
         }
-        Iterator<Cliente> iterator = coleccionClientes.iterator();
-        while (iterator.hasNext()) {
-            Cliente clienteActual = iterator.next();
-            if (clienteActual.getDni().equals(cliente.getDni())) {
-                iterator.remove();
-            }
-        }
+        coleccionClientes.remove(cliente);
     }
 }
