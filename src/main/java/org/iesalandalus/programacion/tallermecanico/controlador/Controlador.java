@@ -7,16 +7,14 @@ import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.tallermecanico.vista.Vista;
 
 import javax.naming.OperationNotSupportedException;
-import javax.naming.ldap.Control;
-import java.awt.event.ActionListener;
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Controlador {
-    private Modelo modelo;
+    private final Modelo modelo;
 
-    private Vista vista;
+    private final Vista vista;
 
     public Controlador(Modelo modelo, Vista vista) {
         Objects.requireNonNull(modelo, "El modelo no puede ser nulo");
@@ -27,35 +25,25 @@ public class Controlador {
     }
 
     public void comenzar() {
+        modelo.comenzar();
         vista.comenzar();
     }
 
     public void terminar() {
+        modelo.terminar();
         vista.terminar();
     }
 
-    public void insertar(Cliente cliente) {
-        try {
-            modelo.insertar(cliente);
-        } catch (OperationNotSupportedException e) {
-            System.out.printf("ERROR: %s", e.getMessage());
-        }
+    public void insertar(Cliente cliente) throws OperationNotSupportedException {
+        modelo.insertar(cliente);
     }
 
-    public void insertar(Vehiculo vehiculo) {
-        try {
-            modelo.insertar(vehiculo);
-        } catch (OperationNotSupportedException e) {
-            System.out.println(e);
-        }
+    public void insertar(Vehiculo vehiculo) throws OperationNotSupportedException {
+        modelo.insertar(vehiculo);
     }
 
-    public void insertar(Revision revision) {
-        try {
-            modelo.insertar(revision);
-        } catch (OperationNotSupportedException e) {
-            System.out.printf("ERROR: %s", e.getMessage());
-        }
+    public void insertar(Revision revision) throws OperationNotSupportedException {
+        modelo.insertar(revision);
     }
 
     public Cliente buscar(Cliente cliente) {
@@ -70,81 +58,51 @@ public class Controlador {
         return modelo.buscar(revision);
     }
 
-    public boolean modificar(Cliente cliente, String nombre, String telefono) {
-        boolean esModificado = false;
-        try {
-            esModificado = modelo.modificar(cliente, nombre, telefono);
-        } catch (OperationNotSupportedException e) {
-            System.out.printf("ERROR: %s", e.getMessage());
-        }
-        return esModificado;
+    public boolean modificar(Cliente cliente, String nombre, String telefono) throws OperationNotSupportedException {
+        return modelo.modificar(cliente, nombre, telefono);
     }
 
-    public void anadirHoras(Revision revision, int horas) {
-        try {
-            modelo.anadirHoras(revision, horas);
-        } catch (OperationNotSupportedException e) {
-            System.out.printf("ERROR: %s", e.getMessage());
-        }
+    public void anadirHoras(Revision revision, int horas) throws OperationNotSupportedException {
+        modelo.anadirHoras(revision, horas);
     }
 
-    public void anadirPrecioMaterial(Revision revision, float precioMaterial) {
-        try {
-            modelo.anadirPrecioMaterial(revision, precioMaterial);
-        } catch (OperationNotSupportedException e) {
-            System.out.printf("ERROR: %s", e.getMessage());
-        }
+    public void anadirPrecioMaterial(Revision revision, float precioMaterial) throws OperationNotSupportedException {
+        modelo.anadirPrecioMaterial(revision, precioMaterial);
     }
 
-    public void cerrar(Revision revision, LocalDate fechaFin) {
-        try {
-            modelo.cerrar(revision, fechaFin);
-        } catch (OperationNotSupportedException e) {
-            System.out.printf("ERROR: %s", e.getMessage());
-        }
+    public void cerrar(Revision revision, LocalDate fechaFin) throws OperationNotSupportedException {
+        modelo.cerrar(revision, fechaFin);
     }
 
-    public void borrar(Cliente cliente) {
-        try {
-            modelo.borrar(cliente);
-        } catch (OperationNotSupportedException e) {
-            System.out.printf("ERROR: %s", e.getMessage());
-        }
+    public void borrar(Cliente cliente) throws OperationNotSupportedException {
+        modelo.borrar(cliente);
     }
 
-    public void borrar(Vehiculo vehiculo) {
-        try {
-            modelo.borrar(vehiculo);
-        } catch (OperationNotSupportedException e) {
-            System.out.printf("ERROR: %s", e.getMessage());
-        }
+    public void borrar(Vehiculo vehiculo) throws OperationNotSupportedException {
+        modelo.borrar(vehiculo);
     }
 
-    public void borrar(Revision revision) {
-        try {
-            modelo.borrar(revision);
-        } catch (OperationNotSupportedException e) {
-            System.out.printf("ERROR: %s", e.getMessage());
-        }
+    public void borrar(Revision revision) throws OperationNotSupportedException {
+        modelo.borrar(revision);
     }
 
-    public ArrayList<Cliente> getClientes() {
+    public List<Cliente> getClientes() {
         return modelo.getClientes();
     }
 
-    public ArrayList<Vehiculo> getVehiculos() {
+    public List<Vehiculo> getVehiculos() {
         return modelo.getVehiculos();
     }
 
-    public ArrayList<Revision> getRevisiones() {
+    public List<Revision> getRevisiones() {
         return modelo.getRevisiones();
     }
 
-    public ArrayList<Revision> getRevisiones(Cliente cliente) {
+    public List<Revision> getRevisiones(Cliente cliente) {
         return modelo.getRevisiones(cliente);
     }
 
-    public ArrayList<Revision> getRevisiones(Vehiculo vehiculo) {
+    public List<Revision> getRevisiones(Vehiculo vehiculo) {
         return modelo.getRevisiones(vehiculo);
     }
 
