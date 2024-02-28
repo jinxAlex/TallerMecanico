@@ -10,9 +10,9 @@ import javax.naming.OperationNotSupportedException;
 public class Revision {
     private Cliente cliente;
     private Vehiculo vehiculo;
-    private static final float PRECIO_HORA = 30;
-    private static final float PRECIO_DIA = 10;
-    private static final float PRECIO_MATERIAL = 1.50f;
+    private static final float PRECIO_HORA = 30F;
+    private static final float PRECIO_DIA = 10F;
+    private static final float PRECIO_MATERIAL = 1.50F;
 
     public static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy") ;
     private LocalDate fechaInicio;
@@ -47,7 +47,6 @@ public class Revision {
     }
 
     public LocalDate getFechaInicio(){
-
         return fechaInicio;
     }
 
@@ -67,7 +66,7 @@ public class Revision {
 
     private void setFechaInicio(LocalDate fechaInicio) {
         Objects.requireNonNull(fechaInicio, "La fecha de inicio no puede ser nula.");
-        if(!fechaInicio.isBefore(LocalDate.now())){
+        if(fechaInicio.isAfter(LocalDate.now())){
             throw new IllegalArgumentException("La fecha de inicio no puede ser futura.");
         }
         this.fechaInicio = fechaInicio;
@@ -77,6 +76,12 @@ public class Revision {
 
     private void setFechaFin(LocalDate fechaFin){
         Objects.requireNonNull(fechaFin,"La fecha no puede ser nula.");
+        if(fechaFin.isBefore(fechaInicio)){
+            throw new IllegalArgumentException("La fecha de fin no puede ser anterior a la fecha de inicio.");
+        }
+        if(fechaFin.isAfter(LocalDate.now())){
+            throw new IllegalArgumentException("La fecha de fin no puede ser futura.");
+        }
         this.fechaFin = fechaFin;
     }
 
@@ -114,23 +119,13 @@ public class Revision {
     }
 
     public boolean estaCerrada(){
-        boolean condicion = false;
-        if(fechaFin != null){
-            condicion = true;
-        }
-        return condicion;
+        return fechaFin != null;
     }
 
     public void cerrar(LocalDate fechaFin) throws OperationNotSupportedException {
         Objects.requireNonNull(fechaFin,"La fecha de fin no puede ser nula.");
         if(estaCerrada()){
             throw new OperationNotSupportedException("La revisión ya está cerrada.");
-        }
-        if(fechaFin.isBefore(fechaInicio)){
-            throw new IllegalArgumentException("La fecha de fin no puede ser anterior a la fecha de inicio.");
-        }
-        if(fechaFin.isAfter(LocalDate.now())){
-            throw new IllegalArgumentException("La fecha de fin no puede ser futura.");
         }
         setFechaFin(fechaFin);
     }
