@@ -1,6 +1,5 @@
 package org.iesalandalus.programacion.tallermecanico.vista;
 
-import org.iesalandalus.programacion.tallermecanico.modelo.Modelo;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Revision;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
@@ -8,14 +7,17 @@ import org.iesalandalus.programacion.utilidades.Entrada;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Consola {
+    private static final String CADENA_FORMATO_FECHA = "dd/MM/yyyy";
     private Consola() {
     }
 
     public static void mostrarCabecera(String mensaje) {
-        System.out.println(mensaje);
-        System.out.println(String.format("%0" + mensaje.length() + "d", 0).replace('0', '-'));
+        System.out.printf("%n%s%n",mensaje);
+        String formatoStr = "%0" + mensaje.length() + "d%n";
+        System.out.println(String.format(formatoStr,0).replace("0","-"));
     }
 
     public static void mostrarMenu() {
@@ -29,8 +31,12 @@ public class Consola {
         mostrarMenu();
         Opcion opcion = null;
         do {
-            System.out.print("Elige una opción: ");
-            opcion = Opcion.get(Entrada.entero());
+            try{
+                System.out.print("Elige una opción: ");
+                opcion = Opcion.get(Entrada.entero());
+            }catch (IllegalArgumentException e){
+                System.out.printf("ERROR: %s%n", e.getMessage());
+            }
         } while (opcion == null);
         return opcion;
     }
@@ -51,21 +57,13 @@ public class Consola {
     }
 
     private static LocalDate leerFecha(String mensaje) {
-        System.out.println(mensaje);
-        LocalDate fecha = null;
-        while (fecha == null) {
-            try {
-                System.out.print("Introduce el día: ");
-                Integer dia = Entrada.entero();
-                System.out.print("Introduce el mes: ");
-                Integer mes = Entrada.entero();
-                System.out.print("Introduce el año: ");
-                Integer anio = Entrada.entero();
-
-                fecha = LocalDate.of(anio, mes, dia);
-            } catch (DateTimeException e) {
-                System.out.println("Fecha no válida. Por favor, ingresa una fecha válida.");
-            }
+        LocalDate fecha;
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern(CADENA_FORMATO_FECHA);
+        mensaje = String.format("%s (%s):", mensaje, CADENA_FORMATO_FECHA);
+        try{
+            fecha = LocalDate.parse(leerCadena(mensaje), formatoFecha);
+        } catch (DateTimeException e) {
+            fecha = null;
         }
         return fecha;
     }
@@ -109,6 +107,4 @@ public class Consola {
     public static LocalDate leerFechaCierre() {
         return leerFecha("Introduce la fecha de cierre de la revisión: ");
     }
-
-
 }
