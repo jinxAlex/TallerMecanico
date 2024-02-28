@@ -4,17 +4,16 @@ import java.util.*;
 
 import javax.naming.OperationNotSupportedException;
 
-import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
 
 public class Vehiculos {
-    private List<Vehiculo> coleccionVehiculos;
+    private final List<Vehiculo> coleccionVehiculos;
 
     public Vehiculos() {
         coleccionVehiculos = new ArrayList<>();
     }
 
-    public ArrayList<Vehiculo> get() {
+    public List<Vehiculo> get() {
         return new ArrayList<>(coleccionVehiculos);
     }
 
@@ -29,8 +28,6 @@ public class Vehiculos {
     public Vehiculo buscar(Vehiculo vehiculo) {
         Objects.requireNonNull(vehiculo, "No se puede buscar un vehículo nulo.");
         int indice = coleccionVehiculos.indexOf(vehiculo);
-
-
         return (indice == -1) ? null : coleccionVehiculos.get(indice);
     }
 
@@ -39,13 +36,7 @@ public class Vehiculos {
         if (!coleccionVehiculos.contains(vehiculo)) {
             throw new OperationNotSupportedException("No existe ningún vehículo con esa matrícula.");
         }
-        Iterator<Vehiculo> iterator = coleccionVehiculos.iterator();
-        while (iterator.hasNext()) {
-            Vehiculo vehiculoActual = iterator.next();
-            if (vehiculoActual.matricula().equals(vehiculo.matricula())) {
-                iterator.remove();
-            }
-        }
+        coleccionVehiculos.remove(vehiculo);
     }
 
 }
