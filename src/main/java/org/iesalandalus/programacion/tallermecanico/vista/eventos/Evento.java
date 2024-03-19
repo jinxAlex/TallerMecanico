@@ -1,9 +1,9 @@
-package org.iesalandalus.programacion.tallermecanico.vista;
+package org.iesalandalus.programacion.tallermecanico.vista.eventos;
 
 import java.util.Map;
 import java.util.TreeMap;
 
-public enum Opcion {
+public enum Evento {
     INSERTAR_CLIENTE(1, "Insertar cliente"),
     BUSCAR_CLIENTE(2, "Buscar cliente"),
     BORRAR_CLIENTE(3, "Borrar cliente"),
@@ -12,31 +12,32 @@ public enum Opcion {
     INSERTAR_VEHICULO(6, "Insertar vehículo"),
     BUSCAR_VEHICULO(7, "Buscar vehículo"),
     BORRAR_VEHICULO(8, "Borrar vehículo"),
-    LISTAR_VEHICULOS(9, "Listar vehiculos"),
+    LISTAR_VEHICULOS(9, "Listar vehículos"),
     INSERTAR_REVISION(10, "Insertar revisión"),
-    BUSCAR_REVISION(11, "Buscar revisión"),
-    BORRAR_REVISION(12, "Borrar revisión"),
-    LISTAR_REVISIONES(13, "Listar revisiones"),
-    LISTAR_REVISIONES_CLIENTE(14, "Listar revisiones de cliente"),
-    LISTAR_REVISIONES_VEHICULO(15, "Listar revisiones de vehículo"),
-    ANADIR_HORAS_REVISION(16, "Añadir horas a revisión"),
-    ANADIR_PRECIO_MATERIAL_REVISION(17, "Añadir precio de material a revisión"),
-    CERRAR_REVISION(18, "Cerrar revisión"),
-    SALIR(19, "Salir");
+    INSERTAR_MECANICO(11, "Insertar trabajo mecánico"),
+    BUSCAR_TRABAJO(12, "Buscar trabajo"),
+    BORRAR_TRABAJO(13, "Borrar trabajo"),
+    LISTAR_TRABAJOS(14, "Listar trabajos"),
+    LISTAR_TRABAJOS_CLIENTE(15, "Listar trabajos de cliente"),
+    LISTAR_TRABAJOS_VEHICULO(16, "Listar trabajos de vehículo"),
+    ANADIR_HORAS_TRABAJO(17, "Añadir horas a trabajo"),
+    ANADIR_PRECIO_MATERIAL_TRABAJO(18, "Añadir precio de material a trabajo mecánico"),
+    CERRAR_TRABAJO(19, "Cerrar trabajo"),
+    SALIR(20, "Salir");
 
-    private static final Map<Integer, Opcion> opciones = new TreeMap<>();
+    private static final Map<Integer, Evento> opciones = new TreeMap<>();
 
     private final int numeroOpcion;
 
     private final String mensaje;
 
     static {
-        for (Opcion opcion : Opcion.values()) {
-            opciones.put(opcion.numeroOpcion, opcion);
+        for (Evento evento : Evento.values()) {
+            opciones.put(evento.numeroOpcion, evento);
         }
     }
 
-    Opcion(int numeroOpcion, String mensaje) {
+    Evento(int numeroOpcion, String mensaje) {
         this.numeroOpcion = numeroOpcion;
         this.mensaje = mensaje;
     }
@@ -45,7 +46,7 @@ public enum Opcion {
         return opciones.containsKey(numeroOpcion);
     }
 
-    public static Opcion get(int numeroOpcion) {
+    public static Evento get(int numeroOpcion) {
         if (!esValida(numeroOpcion)) {
             throw new IllegalArgumentException("La opción es incorrecta");
         }

@@ -1127,13 +1127,13 @@
                     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_DqEbgczPEe66S_aNl6MGrQ" name="comenzar" specification="_DqEbgMzPEe66S_aNl6MGrQ">
                       <language>JAVA</language>
                       <body>
-    System.out.println(&quot;Modelo comenzado.&quot;);
+    System.out.println(&quot;ModeloCascada comenzado.&quot;);
 </body>
                     </ownedBehavior>
                     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_DqEbg8zPEe66S_aNl6MGrQ" name="terminar" specification="_DqEbgszPEe66S_aNl6MGrQ">
                       <language>JAVA</language>
                       <body>
-    System.out.println(&quot;Modelo terminado.&quot;);
+    System.out.println(&quot;ModeloCascada terminado.&quot;);
 </body>
                     </ownedBehavior>
                     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_DqFCkczPEe66S_aNl6MGrQ" name="insertar" specification="_DqEbhMzPEe66S_aNl6MGrQ">
@@ -1737,23 +1737,23 @@
                     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_FbPZoM79Ee6dsIuvGKkUNw" name="comenzar" specification="_FbOykM79Ee6dsIuvGKkUNw">
                       <language>JAVA</language>
                       <body>
-    Evento opcion;
+    Evento evento;
     do {
         Consola.mostrarMenu();
-        opcion = Consola.elegirOpcion();
-        ejecutar(opcion);
-    } while (opcion != Evento.SALIR);
+        evento = Consola.elegirOpcion();
+        ejecutar(evento);
+    } while (evento != Evento.SALIR);
 </body>
                     </ownedBehavior>
                     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_FbQnwc79Ee6dsIuvGKkUNw" name="ejecutar" specification="_FbQAsM79Ee6dsIuvGKkUNw">
-                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_4r5WM88dEe6dsIuvGKkUNw" name="opcion" type="_gbjawM78Ee6dsIuvGKkUNw">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_4r5WM88dEe6dsIuvGKkUNw" name="evento" type="_gbjawM78Ee6dsIuvGKkUNw">
                         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4r5WNM8dEe6dsIuvGKkUNw" value="1"/>
                         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4r5WNc8dEe6dsIuvGKkUNw" value="1"/>
                       </ownedParameter>
                       <language>JAVA</language>
                       <body>
-    Consola.mostrarCabecera(opcion.toString());
-    gestorEventos.notificar(opcion);
+    Consola.mostrarCabecera(evento.toString());
+    gestorEventos.notificar(evento);
 </body>
                     </ownedBehavior>
                     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_FbRO0c79Ee6dsIuvGKkUNw" name="terminar" specification="_FbRO0M79Ee6dsIuvGKkUNw">
@@ -2031,7 +2031,7 @@
                     </ownedOperation>
                     <ownedOperation xmi:type="uml:Operation" xmi:id="_FbOykM79Ee6dsIuvGKkUNw" name="comenzar" visibility="public" method="_FbPZoM79Ee6dsIuvGKkUNw"/>
                     <ownedOperation xmi:type="uml:Operation" xmi:id="_FbQAsM79Ee6dsIuvGKkUNw" name="ejecutar" visibility="private" method="_FbQnwc79Ee6dsIuvGKkUNw">
-                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_FbQnwM79Ee6dsIuvGKkUNw" name="opcion" type="_gbjawM78Ee6dsIuvGKkUNw"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_FbQnwM79Ee6dsIuvGKkUNw" name="evento" type="_gbjawM78Ee6dsIuvGKkUNw"/>
                     </ownedOperation>
                     <ownedOperation xmi:type="uml:Operation" xmi:id="_FbRO0M79Ee6dsIuvGKkUNw" name="terminar" visibility="public" method="_FbRO0c79Ee6dsIuvGKkUNw"/>
                     <ownedOperation xmi:type="uml:Operation" xmi:id="_FbRO0s79Ee6dsIuvGKkUNw" name="leerCliente" visibility="public" method="_FbU5MM79Ee6dsIuvGKkUNw">
@@ -2154,23 +2154,23 @@
                       <language>JAVA</language>
                       <body>
     mostrarCabecera(&quot;Gestión de un taller mecánico.&quot;);
-    for (Evento opcion : Evento.values()) {
-        System.out.printf(&quot;%d.- %s%n&quot;, opcion.getCodigo(), opcion);
+    for (Evento evento : Evento.values()) {
+        System.out.printf(&quot;%d.- %s%n&quot;, evento.getCodigo(), evento);
     }
 </body>
                     </ownedBehavior>
                     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_GSGwMM79Ee6dsIuvGKkUNw" name="elegirOpcion" specification="_GSGJIM79Ee6dsIuvGKkUNw">
                       <language>JAVA</language>
                       <body>
-    Evento opcion = null;
+    Evento evento = null;
     do {
         try {
-            opcion = Evento.get(leerEntero(&quot;\nElige un opción: &quot;));
+            evento = Evento.get(leerEntero(&quot;\nElige un opción: &quot;));
         } catch (IllegalArgumentException e) {
             System.out.printf(&quot;ERROR: %s%n&quot;, e.getMessage());
         }
-    } while (opcion == null);
-    return opcion;
+    } while (evento == null);
+    return evento;
 </body>
                     </ownedBehavior>
                     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_GSIlYc79Ee6dsIuvGKkUNw" name="leerEntero" specification="_GSHXQM79Ee6dsIuvGKkUNw">
@@ -2459,7 +2459,7 @@
                 <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_iBU5kMWXEe6PL5kubjCEzQ" name="main" specification="_iBLvoMWXEe6PL5kubjCEzQ">
                   <language>JAVA</language>
                   <body>
-    Modelo modelo = new Modelo();
+    ModeloCascada modelo = new ModeloCascada();
     Vista vista = new Vista();
     Controlador controlador = new Controlador(modelo, vista);
     controlador.comenzar();
@@ -2567,7 +2567,7 @@
       <packagedElement xmi:type="uml:Package" xmi:id="_TzrBsMWPEe6GV74yg1DxAg" name="modelo">
         <ownedComment xmi:type="uml:Comment" xmi:id="_NZqC4M8XEe6dsIuvGKkUNw" annotatedElement="_zA5dEMy-Ee6KuY7X7xWG0g">
           <body>--------------------------------
-+ &lt;&lt;abstract>> crear(fabricaFuenteDatos: FabricaFuenteDatos): Modelo</body>
++ &lt;&lt;abstract>> crear(fabricaFuenteDatos: FabricaFuenteDatos): ModeloCascada</body>
         </ownedComment>
         <packagedElement xmi:type="uml:Package" xmi:id="_-T3GoMWNEe6GV74yg1DxAg" name="negocio">
           <ownedComment xmi:type="uml:Comment" xmi:id="_4JATQM8XEe6dsIuvGKkUNw" annotatedElement="_IhZ7sMzAEe6KuY7X7xWG0g">
@@ -2687,8 +2687,8 @@
           </ownedOperation>
           <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_zA7SQMy-Ee6KuY7X7xWG0g" name="CASCADA"/>
         </packagedElement>
-        <packagedElement xmi:type="uml:Interface" xmi:id="_0Z-I0My-Ee6KuY7X7xWG0g" name="Modelo" visibility="public">
-          <nestedClassifier xmi:type="uml:Interface" xmi:id="_W8MBsM8aEe6dsIuvGKkUNw" name="Modelo"/>
+        <packagedElement xmi:type="uml:Interface" xmi:id="_0Z-I0My-Ee6KuY7X7xWG0g" name="ModeloCascada" visibility="public">
+          <nestedClassifier xmi:type="uml:Interface" xmi:id="_W8MBsM8aEe6dsIuvGKkUNw" name="ModeloCascada"/>
           <ownedOperation xmi:type="uml:Operation" xmi:id="_0Z_-AMy-Ee6KuY7X7xWG0g" name="comenzar" visibility="public"/>
           <ownedOperation xmi:type="uml:Operation" xmi:id="_0aCaQMy-Ee6KuY7X7xWG0g" name="terminar" visibility="public"/>
           <ownedOperation xmi:type="uml:Operation" xmi:id="_0aDoYMy-Ee6KuY7X7xWG0g" name="insertar" visibility="public" raisedException="_rn8E8MWLEe6GV74yg1DxAg">
@@ -2828,7 +2828,7 @@
   <Codegen:External xmi:id="_XYI8EMWREe6GV74yg1DxAg" name="org.iesalandalus.programacion.tallermecanico.controlador.Controlador" base_Classifier="_XYHG4cWREe6GV74yg1DxAg"/>
   <Codegen:External xmi:id="_zBB_8My-Ee6KuY7X7xWG0g" name="org.iesalandalus.programacion.tallermecanico.modelo.negocio.FabricaFuenteDatos" base_Classifier="_zA8gYcy-Ee6KuY7X7xWG0g"/>
   <Codegen:External xmi:id="_0aP1oMy-Ee6KuY7X7xWG0g" name="org.iesalandalus.programacion.tallermecanico.modelo.dominio.Trabajo" base_Classifier="_0aMyUMy-Ee6KuY7X7xWG0g"/>
-  <Codegen:External xmi:id="_cp6-kMy_Ee6KuY7X7xWG0g" name="org.iesalandalus.programacion.tallermecanico.modelo.Modelo" base_Classifier="_0Z-I0My-Ee6KuY7X7xWG0g"/>
+  <Codegen:External xmi:id="_cp6-kMy_Ee6KuY7X7xWG0g" name="org.iesalandalus.programacion.tallermecanico.modelo.ModeloCascada" base_Classifier="_0Z-I0My-Ee6KuY7X7xWG0g"/>
   <Codegen:External xmi:id="_cqMEUMy_Ee6KuY7X7xWG0g" name="IFuenteDatos" base_Classifier="_cqKPIMy_Ee6KuY7X7xWG0g"/>
   <Codegen:External xmi:id="_cqOgkMy_Ee6KuY7X7xWG0g" name="FabricaFuenteDatos" base_Classifier="_cqMrYcy_Ee6KuY7X7xWG0g"/>
   <Codegen:External xmi:id="_cqVOQMy_Ee6KuY7X7xWG0g" name="Cliente" base_Classifier="_cqUAIMy_Ee6KuY7X7xWG0g"/>
