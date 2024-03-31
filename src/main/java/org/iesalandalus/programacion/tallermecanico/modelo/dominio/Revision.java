@@ -25,7 +25,7 @@ public class Revision extends Trabajo {
     @Override
     public String toString() {
         String salida;
-        if(getFechaFin() == null){
+        if(!estaCerrado()){
             salida = String.format("Revisión -> %s - %s (%s) - %s %s - %s (%s - ): %d horas",cliente.getNombre(),cliente.getDni(),cliente.getTelefono(),vehiculo.marca(), vehiculo.modelo(), vehiculo.matricula(),getFechaInicio().format(FORMATO_FECHA), getHoras());
         }else{
             salida = String.format("Revisión -> %s - %s (%s) - %s %s - %s (%s - %s): %d horas, %.2f € total",cliente.getNombre(),cliente.getDni(),cliente.getTelefono(),vehiculo.marca(), vehiculo.modelo(), vehiculo.matricula(),getFechaInicio().format(FORMATO_FECHA),getFechaFin().format(FORMATO_FECHA) , getHoras(), getPrecio());
