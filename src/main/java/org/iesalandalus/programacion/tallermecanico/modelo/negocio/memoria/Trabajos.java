@@ -50,11 +50,6 @@ public class Trabajos implements ITrabajos {
                 trabajoAbierto = trabajoActual;
             }
         }
-/*        for (Trabajo trabajoActual : coleccionTrabajo) {
-            if (trabajoActual.getVehiculo().equals(vehiculo) && !trabajoActual.estaCerrado() && trabajoAbierto == null) {
-                trabajoAbierto = trabajoActual;
-            }
-        }*/
         return trabajoAbierto;
     }
 
@@ -103,6 +98,8 @@ public class Trabajos implements ITrabajos {
         }
         if(trabajoAbierto instanceof Mecanico trabajoMecanico){
             trabajoMecanico.anadirHoras(horas);
+        }else if (trabajoAbierto instanceof Revision trabajoRevision){
+            trabajoRevision.anadirHoras(horas);
         }
     }
 
@@ -129,15 +126,24 @@ public class Trabajos implements ITrabajos {
         }
         if(trabajoAbierto instanceof Mecanico trabajoMecanico){
             trabajoMecanico.cerrar(fechaFin);
+        }else if (trabajoAbierto instanceof Revision trabajoRevision){
+            trabajoRevision.cerrar(fechaFin);
         }
     }
 
     @Override
     public void borrar(Trabajo trabajo) throws OperationNotSupportedException {
         Objects.requireNonNull(trabajo, "No se puede borrar un trabajo nulo.");
+        Mecanico trabajoMecanico = new Mecanico(trabajo.getCliente(),trabajo.getVehiculo(),trabajo.getFechaInicio());
         if (buscar(trabajo) == null) {
-            throw new OperationNotSupportedException("No existe ningún trabajo igual.");
+            if(buscar(trabajoMecanico) == null){
+                throw new OperationNotSupportedException("No existe ningún trabajo igual.");
+            }else{
+                coleccionTrabajo.remove(trabajoMecanico);
+            }
+        }else{
+            coleccionTrabajo.remove(trabajo);
         }
-        coleccionTrabajo.remove(trabajo);
+        
     }
 }
