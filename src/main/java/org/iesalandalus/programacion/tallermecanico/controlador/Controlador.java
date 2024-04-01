@@ -39,9 +39,9 @@ public class Controlador implements IControlador {
                 case INSERTAR_VEHICULO -> { modelo.insertar(vista.leerVehiculo()); resultado = "Vehiculo insertado correctamente";}
                 case INSERTAR_REVISION -> { modelo.insertar(vista.leerRevision()); resultado = "Trabajo de revisión insertado correctamente";}
                 case INSERTAR_MECANICO -> {modelo.insertar(vista.leerMecanico()); resultado = "Trabajo mecánico insertado correctamente";}
-                case BUSCAR_CLIENTE -> modelo.buscar(vista.leerClienteDni());
-                case BUSCAR_VEHICULO -> modelo.buscar(vista.leerVehiculoMatricula());
-                case BUSCAR_TRABAJO -> modelo.buscar(vista.leerTrabajoVehiculo());
+                case BUSCAR_CLIENTE -> vista.mostrarCliente(modelo.buscar(vista.leerClienteDni()));
+                case BUSCAR_VEHICULO -> vista.mostrarVehiculo(modelo.buscar(vista.leerVehiculoMatricula()));
+                case BUSCAR_TRABAJO -> vista.mostrarTrabajo(modelo.buscar(vista.leerMecanico()));
                 case MODIFICAR_CLIENTE -> {modelo.modificar(vista.leerClienteDni(), vista.leerNuevoNombre(), vista.leerNuevoTelefono()); resultado = "El cliente se ha modificado correctamente";}
                 case ANADIR_HORAS_TRABAJO -> {modelo.anadirHoras(vista.leerTrabajoVehiculo(),vista.leerHoras()); resultado = "Horas añadidas correctamente";}
                 case ANADIR_PRECIO_MATERIAL_TRABAJO -> {modelo.anadirPrecioMaterial(vista.leerTrabajoVehiculo(),vista.leerPrecioMaterial());  resultado = "Precio material añadido correctamente";}
