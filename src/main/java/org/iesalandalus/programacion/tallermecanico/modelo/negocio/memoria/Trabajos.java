@@ -126,8 +126,6 @@ public class Trabajos implements ITrabajos {
         }
         if(trabajoAbierto instanceof Mecanico trabajoMecanico){
             trabajoMecanico.cerrar(fechaFin);
-        }else if (trabajoAbierto instanceof Revision trabajoRevision){
-            trabajoRevision.cerrar(fechaFin);
         }
     }
 
