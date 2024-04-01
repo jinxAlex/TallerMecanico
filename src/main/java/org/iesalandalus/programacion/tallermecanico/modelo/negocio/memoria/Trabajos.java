@@ -124,9 +124,7 @@ public class Trabajos implements ITrabajos {
         if(trabajoAbierto == null){
             throw new OperationNotSupportedException("No existe ningún trabajo abierto para dicho vehículo.");
         }
-        if(trabajoAbierto instanceof Mecanico trabajoMecanico){
-            trabajoMecanico.cerrar(fechaFin);
-        }
+        trabajoAbierto.cerrar(fechaFin);
     }
 
     @Override
