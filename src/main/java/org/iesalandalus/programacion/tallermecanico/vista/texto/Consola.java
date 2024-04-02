@@ -20,7 +20,7 @@ public class Consola {
     }
 
     static void mostrarMenu() {
-        System.out.println();
+        mostrarCabecera("Gestión de un taller mecánico.");
         for (Evento evento : Evento.values()) {
             System.out.println(evento);
         }
