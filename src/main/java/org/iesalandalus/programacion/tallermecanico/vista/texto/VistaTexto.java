@@ -26,7 +26,7 @@ public class VistaTexto implements Vista {
         do {
             evento = Consola.elegirOpcion();
             ejecutar(evento);
-        } while (!(evento.equals(Evento.SALIR)));
+        } while (evento != Evento.SALIR);
 
     }
 
@@ -105,7 +105,7 @@ public class VistaTexto implements Vista {
         if(exito){
             System.out.println(texto);
         }else{
-            System.out.printf("ERROR: %s ", texto);
+            System.out.printf("ERROR: %s%n", texto);
         }
     }
 
@@ -126,18 +126,34 @@ public class VistaTexto implements Vista {
 
     @Override
     public void mostrarClientes(List<Cliente> clientes){
-        System.out.println(clientes);
+        if(!clientes.isEmpty()){
+            for(Cliente cliente: clientes){
+                System.out.println(cliente);
+            }
+        }else{
+            System.out.println("No hay clientes que mostrar.");
+        }
     }
 
     @Override
     public void mostrarVehiculos(List<Vehiculo> vehiculos){
-        System.out.println(vehiculos);
+        if(!vehiculos.isEmpty()){
+            for(Vehiculo vehiculo:vehiculos){
+                System.out.println(vehiculo);
+            }
+        }else{
+            System.out.println("No hay vehículos que mostrar.");
+        }
     }
 
     @Override
     public void mostrarTrabajos(List<Trabajo> trabajos){
-        System.out.println(trabajos);
+        if(!trabajos.isEmpty()){
+            for(Trabajo trabajo: trabajos){
+                System.out.println(trabajo);
+            }
+        }else{
+            System.out.println("No hay trabajos que mostrar.");
+        }
     }
-
-
 }
