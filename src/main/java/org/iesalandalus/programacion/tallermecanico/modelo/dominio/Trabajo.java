@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-public class Trabajo {
+public abstract class Trabajo {
     public static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private static final float FACTOR_DIA = 10F;
     protected Cliente cliente;
@@ -36,12 +36,12 @@ public class Trabajo {
         } else if (trabajo instanceof Revision trabajoRevision) {
             trabajoCopiado = new Revision(trabajoRevision);
         }
-
         return trabajoCopiado;
     }
 
     public static Trabajo get(Vehiculo vehiculo){
-        return new Trabajo(new Cliente("Prueba","78019135F","123456789"), vehiculo, LocalDate.now());
+        Objects.requireNonNull(vehiculo,"El vehículo no puede ser nulo.");
+        return new Revision(new Cliente("Prueba","78019135F","123456789"), vehiculo, LocalDate.now());
     }
     public Cliente getCliente() {
         return cliente;
@@ -115,11 +115,11 @@ public class Trabajo {
     }
 
     public float getPrecio() {
-        return getPrecioEspecifico();
+        return getPrecioFijo() + getPrecioEspecifico();
     }
 
     private float getPrecioFijo(){
-        return (getDias() * FACTOR_DIA) ;
+        return (estaCerrado()) ? FACTOR_DIA * getDias() : 0;
     }
 
     private float getDias() {
@@ -130,9 +130,7 @@ public class Trabajo {
         return dias;
     }
 
-    public float getPrecioEspecifico(){
-        return getPrecioFijo();
-    }
+    public abstract float getPrecioEspecifico();
 
 
     @Override
