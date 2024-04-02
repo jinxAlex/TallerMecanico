@@ -7,6 +7,7 @@ public class GestorEventos {
     private final Map<Evento, List<ReceptorEventos>> receptores = new EnumMap<>(Evento.class);
 
     public GestorEventos(Evento ... eventos) {
+        Objects.requireNonNull(eventos,"Se debe gestionar algún evento");
         for (Evento evento : eventos) {
             receptores.put(evento, new ArrayList<>());
         }
