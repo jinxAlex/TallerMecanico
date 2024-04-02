@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Mecanico extends Trabajo {
     private static final float FACTOR_HORA = 30F;
-    private static final float FACTOR_PRECIO_MATERIAL = 1.50F;
+    private static final float FACTOR_PRECIO_MATERIAL = 1.5F;
 
     private float precioMaterial= 0;
 
@@ -25,7 +25,7 @@ public class Mecanico extends Trabajo {
     }
 
     public float getPrecioEspecifico() {
-        return (super.getPrecioEspecifico() + getHoras() * FACTOR_HORA + getPrecioMaterial() * FACTOR_PRECIO_MATERIAL ) ;
+        return (estaCerrado()) ? FACTOR_HORA * getHoras() + FACTOR_PRECIO_MATERIAL * getPrecioMaterial() : 0;
     }
 
 
