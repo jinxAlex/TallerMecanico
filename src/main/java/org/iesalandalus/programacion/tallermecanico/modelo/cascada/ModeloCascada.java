@@ -22,7 +22,6 @@ public class ModeloCascada implements Modelo {
         clientes = fuenteDatos.crearClientes();
         vehiculos = fuenteDatos.crearVehiculos();
         trabajos = fuenteDatos.crearTrabajos();
-        comenzar();
     }
 
     @Override
