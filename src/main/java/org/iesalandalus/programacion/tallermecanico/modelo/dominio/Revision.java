@@ -17,8 +17,9 @@ public class Revision extends Trabajo {
         super(revision);
     }
 
+    @Override
     public float getPrecioEspecifico() {
-        return (super.getPrecioEspecifico() + getHoras() * FACTOR_HORA ) ;
+        return (estaCerrado()) ? getHoras() * FACTOR_HORA: 0;
     }
 
 
