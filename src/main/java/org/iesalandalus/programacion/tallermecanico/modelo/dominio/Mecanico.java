@@ -2,7 +2,6 @@ package org.iesalandalus.programacion.tallermecanico.modelo.dominio;
 
 import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
-import java.util.Objects;
 
 public class Mecanico extends Trabajo {
     private static final float FACTOR_HORA = 30F;
