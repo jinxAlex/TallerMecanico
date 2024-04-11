@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.tallermecanico.modelo.negocio.memoria;
+package org.iesalandalus.programacion.tallermecanico.modelo.negocio.ficheros;
 
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.*;
 import org.iesalandalus.programacion.tallermecanico.modelo.negocio.ITrabajos;
@@ -13,6 +13,18 @@ public class Trabajos implements ITrabajos {
 
     public Trabajos() {
         coleccionTrabajo = new ArrayList<>();
+    }
+
+    protected static Trabajos getInstancia(){
+        return null;
+    }
+
+    public void comenzar(){
+
+    }
+
+    public void terminar(){
+
     }
 
     @Override
@@ -121,6 +133,27 @@ public class Trabajos implements ITrabajos {
         Objects.requireNonNull(trabajo,"No puedo cerrar un trabajo nulo.");
         Trabajo trabajoAbierto = getTrabajoAbierto(trabajo.getVehiculo());
         trabajoAbierto.cerrar(fechaFin);
+    }
+
+    @Override
+    public Map<TipoTrabajo, Integer> inicialicarEstadisticas(){
+        Map<TipoTrabajo, Integer> estadisticasMensuales = new EnumMap<>(TipoTrabajo.class);
+        for(TipoTrabajo tipoTrabajo: TipoTrabajo.values()){
+            estadisticasMensuales.put(tipoTrabajo,0);
+        }
+        return estadisticasMensuales;
+    }
+    @Override
+    public Map<TipoTrabajo, Integer> getEstadisticasMensuales(LocalDate mes){
+        Objects.requireNonNull(mes,"El mes no puede ser nulo");
+        Map<TipoTrabajo, Integer> estadisticasMensuales = inicialicarEstadisticas();
+        for(Trabajo trabajo: coleccionTrabajo){
+            if(trabajo.getFechaInicio().getMonth() == mes.getMonth() && trabajo.getFechaInicio().getYear() == mes.getYear()){
+                TipoTrabajo tipoTrabajo = TipoTrabajo.get(trabajo);
+                estadisticasMensuales.put(tipoTrabajo,estadisticasMensuales.get(tipoTrabajo) + 1);
+            }
+        }
+        return estadisticasMensuales;
     }
 
     @Override

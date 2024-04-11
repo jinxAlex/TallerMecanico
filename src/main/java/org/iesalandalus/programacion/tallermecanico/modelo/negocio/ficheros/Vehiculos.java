@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.tallermecanico.modelo.negocio.memoria;
+package org.iesalandalus.programacion.tallermecanico.modelo.negocio.ficheros;
 
 import java.util.*;
 
@@ -12,6 +12,14 @@ public class Vehiculos implements IVehiculos {
 
     public Vehiculos() {
         coleccionVehiculos = new ArrayList<>();
+    }
+
+    public void comenzar(){
+
+    }
+
+    public void terminar(){
+
     }
 
     @Override

@@ -22,8 +22,9 @@ public enum Evento {
     LISTAR_TRABAJOS_VEHICULO(16, "Listar trabajos de vehículo"),
     ANADIR_HORAS_TRABAJO(17, "Añadir horas a trabajo"),
     ANADIR_PRECIO_MATERIAL_TRABAJO(18, "Añadir precio de material a trabajo mecánico"),
-    CERRAR_TRABAJO(19, "Cerrar trabajo"),
-    SALIR(20, "Salir");
+    MOSTRAR_ESTADISTICAS_MENSUALES(19, "Mostrar estadísticas mensuales"),
+    CERRAR_TRABAJO(20, "Cerrar trabajo"),
+    SALIR(21, "Salir");
 
     private static final Map<Integer, Evento> opciones = new TreeMap<>();
 

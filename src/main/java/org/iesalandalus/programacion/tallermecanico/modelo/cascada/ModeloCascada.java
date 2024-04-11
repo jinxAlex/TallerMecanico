@@ -8,6 +8,7 @@ import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class ModeloCascada implements Modelo {
@@ -157,6 +158,11 @@ public class ModeloCascada implements Modelo {
             coleccionTrabajosVehiculo.add(Trabajo.copiar(trabajo));
         }
         return coleccionTrabajosVehiculo;
+    }
+
+    @Override
+    public Map<TipoTrabajo, Integer> getEstadisticasMensuales(LocalDate mes) {
+        return trabajos.getEstadisticasMensuales(mes);
     }
 
 }
