@@ -6,6 +6,10 @@ import javax.naming.OperationNotSupportedException;
 import java.util.List;
 
 public interface IClientes {
+
+    void terminar();
+    void comenzar();
+
     List<Cliente> get();
 
     void insertar(Cliente cliente) throws OperationNotSupportedException;

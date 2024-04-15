@@ -6,6 +6,8 @@ import javax.naming.OperationNotSupportedException;
 import java.util.List;
 
 public interface IVehiculos {
+    void terminar();
+    void comenzar();
     List<Vehiculo> get();
 
     void insertar(Vehiculo vehiculo) throws OperationNotSupportedException;

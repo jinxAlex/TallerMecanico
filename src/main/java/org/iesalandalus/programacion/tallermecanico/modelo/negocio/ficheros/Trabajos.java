@@ -22,10 +22,10 @@ public class Trabajos implements ITrabajos {
     private static final String TRABAJO = "trabajo";
     private static final String CLIENTE = "cliente";
     private static final String VEHICULO = "vehiculo";
-    private static final String FECHA_INICIO = "fecha inicio";
-    private static final String FECHA_FIN = "fecha fin";
+    private static final String FECHA_INICIO = "fechaInicio";
+    private static final String FECHA_FIN = "fechaFin";
     private static final String HORAS = "horas";
-    private static final String PRECIO_MATERIAL = "precio material";
+    private static final String PRECIO_MATERIAL = "precioMaterial";
     private static final String TIPO = "tipo";
     private static final String REVISION = "revision";
     private static final String MECANICO = "mecanico";
@@ -68,17 +68,18 @@ public class Trabajos implements ITrabajos {
 
     private Trabajo getTrabajo(Element elemento) throws OperationNotSupportedException{
         Trabajo trabajo = null;
-        Cliente cliente = Cliente.get(elemento.getAttribute(CLIENTE));
+        String dni = elemento.getAttribute(CLIENTE);
+        Cliente cliente = Cliente.get(dni);
         cliente = Clientes.getInstancia().buscar(cliente);
         Vehiculo vehiculo = Vehiculo.get(elemento.getAttribute(VEHICULO));
         vehiculo = Vehiculos.getInstancia().buscar(vehiculo);
-        LocalDate fechaInicio = LocalDate.parse(elemento.getAttribute(FECHA_INICIO));
+        LocalDate fechaInicio = LocalDate.parse(elemento.getAttribute(FECHA_INICIO),FORMATO_FECHA);
         if(elemento.getAttribute(TIPO).equals(REVISION)){
             trabajo = new Revision(cliente, vehiculo, fechaInicio);
         }else if(elemento.getAttribute(TIPO).equals(MECANICO)){
             trabajo = new Mecanico(cliente, vehiculo, fechaInicio);
             if(elemento.hasAttribute(PRECIO_MATERIAL)){
-                trabajo.anadirHoras(Integer.parseInt(elemento.getAttribute(PRECIO_MATERIAL)));
+               ((Mecanico) trabajo).anadirPrecioMaterial(Float.parseFloat(elemento.getAttribute(PRECIO_MATERIAL)));
             }
         }
         if(elemento.hasAttribute(HORAS) && trabajo != null){
@@ -86,7 +87,7 @@ public class Trabajos implements ITrabajos {
         }
 
         if(elemento.hasAttribute(FECHA_FIN) && trabajo != null){
-            trabajo.cerrar(LocalDate.parse(elemento.getAttribute(FECHA_FIN)));
+            trabajo.cerrar(LocalDate.parse(elemento.getAttribute(FECHA_FIN),FORMATO_FECHA));
         }
         
         return trabajo;

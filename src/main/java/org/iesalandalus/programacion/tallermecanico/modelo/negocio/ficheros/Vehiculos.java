@@ -20,7 +20,7 @@ public class Vehiculos implements IVehiculos {
     private static final String RAIZ = "Vehiculos";
     private static final String VEHICULO = "vehiculo";
     private static final String MARCA = "marca";
-    private static final String MODELO = "marca";
+    private static final String MODELO = "modelo";
     private static final String MATRICULA = "matricula";
     private static Vehiculos instancia;
 
