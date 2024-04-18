@@ -24,7 +24,7 @@ public class Vehiculos implements IVehiculos {
     private static final String MATRICULA = "matricula";
     private static Vehiculos instancia;
 
-    public Vehiculos() {
+    private Vehiculos() {
         coleccionVehiculos = new ArrayList<>();
     }
 

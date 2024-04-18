@@ -34,7 +34,7 @@ public class Trabajos implements ITrabajos {
 
     private static Trabajos instancia;
 
-    public Trabajos() {
+    private Trabajos() {
         coleccionTrabajos = new ArrayList<>();
     }
 
