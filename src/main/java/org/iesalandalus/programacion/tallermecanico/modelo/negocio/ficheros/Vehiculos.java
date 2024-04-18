@@ -28,7 +28,7 @@ public class Vehiculos implements IVehiculos {
         coleccionVehiculos = new ArrayList<>();
     }
 
-    protected static Vehiculos getInstancia(){
+    static Vehiculos getInstancia(){
         if(instancia == null){
             instancia = new Vehiculos();
         }

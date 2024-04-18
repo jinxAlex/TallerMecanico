@@ -32,7 +32,7 @@ public class Clientes implements IClientes {
     }
 
 
-    protected static Clientes getInstancia(){
+    static Clientes getInstancia(){
         if(instancia == null){
             instancia = new Clientes();
         }
