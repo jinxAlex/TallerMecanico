@@ -55,4 +55,8 @@ public interface Vista {
     void mostrarTrabajos(List<Trabajo> trabajos);
 
     void mostrarEstadisticasMensuales(Map<TipoTrabajo, Integer> estadisticas);
+
+    default void mostrarTrabajosClientes(List<Trabajo> trabajos){mostrarTrabajos(trabajos);}
+
+    default void mostrarTrabajosVehiculos(List<Trabajo> trabajos){mostrarTrabajos(trabajos);}
 }
