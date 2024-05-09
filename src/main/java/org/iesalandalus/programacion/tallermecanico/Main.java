@@ -11,7 +11,7 @@ import org.iesalandalus.programacion.tallermecanico.vista.texto.Vista;
 public class Main {
     public static void main(String[] args) {
         Vista vista = FabricaVista.TEXTO.crear();
-        Modelo modelo = FabricaModelo.CASCADA.crear(FabricaFuenteDatos.MEMORIA);
+        Modelo modelo = FabricaModelo.CASCADA.crear(FabricaFuenteDatos.FICHEROS);
         IControlador controlador = new Controlador(modelo, vista);
         controlador.comenzar();
     }
