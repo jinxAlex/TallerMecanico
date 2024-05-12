@@ -18,7 +18,7 @@ public class InsertarCliente extends Controlador {
     private TextField tfTlf;
 
     @FXML
-    void crearCliente(ActionEvent event) {
+    void crearCliente() {
 
     }
 }

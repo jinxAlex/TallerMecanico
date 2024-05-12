@@ -78,6 +78,8 @@ public class VentanaPrincipal extends Controlador {
 
     private static final Image VEHICULOS = new Image(VentanaPrincipal.class.getResourceAsStream("/imagenes/vehiculos/vehiculos.png"),50, 50, true, true);
 
+    private static final Image TRABAJOS = new Image(VentanaPrincipal.class.getResourceAsStream("/imagenes/trabajos/trabajos.png"),50, 50, true, true);
+
 
     private void ocultarBotones(Button ... botones){
         for(Button boton: botones){
@@ -102,6 +104,7 @@ public class VentanaPrincipal extends Controlador {
     void initialize(){
         btImagenCliente.setImage(CLIENTES);
         btImagenVehiculos.setImage(VEHICULOS);
+        btImagenTrabajos.setImage(TRABAJOS);
         mostrarMenuCliente();
     }
 
@@ -130,7 +133,7 @@ public class VentanaPrincipal extends Controlador {
         ocultarBotones(btUno, btDos, btTres, btCuatro,btCinco,btSeis);
 
         Map<Button, String[]> mapaBotonesClientes = Map.ofEntries(
-                Map.entry(btUno, new String[]{"Insetar cliente", "clientes/insertarCliente.png"}),
+                Map.entry(btUno, new String[]{"Insertar cliente", "clientes/insertarCliente.png"}),
                 Map.entry(btDos, new String[]{"Borrar cliente", "clientes/borrarCliente.png"}),
                 Map.entry(btTres, new String[]{"Modificar cliente", "clientes/modificarCliente.png"}),
                 Map.entry(btCuatro, new String[]{"Listar clientes", "listar.png"})
