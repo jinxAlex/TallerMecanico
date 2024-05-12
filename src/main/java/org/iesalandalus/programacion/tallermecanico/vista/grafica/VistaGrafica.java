@@ -4,12 +4,13 @@ import javafx.stage.Stage;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.*;
 import org.iesalandalus.programacion.tallermecanico.modelo.negocio.ficheros.Trabajos;
 import org.iesalandalus.programacion.tallermecanico.ventanas.LanzadoraVentanaPrincipal;
+import org.iesalandalus.programacion.tallermecanico.ventanas.controladores.VentanaPrincipal;
 import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Controlador;
+import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Controladores;
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.Evento;
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.GestorEventos;
 import org.iesalandalus.programacion.tallermecanico.vista.texto.Vista;
 
-import javax.swing.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +49,8 @@ public class VistaGrafica implements Vista {
 
     @Override
     public Cliente leerCliente() {
+        Controlador ventanaInsetarCliente = Controladores.get("/vistas/InsertarCliente.fxml", "Insertar Cliente", ventanaPrincipal.getEscenario());
+        ventanaInsetarCliente.getEscenario().show();
         return null;
     }
 
@@ -128,7 +131,7 @@ public class VistaGrafica implements Vista {
 
     @Override
     public void mostrarCliente(Cliente cliente) {
-
+        
     }
 
     @Override
@@ -143,12 +146,16 @@ public class VistaGrafica implements Vista {
 
     @Override
     public void mostrarClientes(List<Cliente> clientes) {
-
+        for(Cliente cliente: clientes){
+            VentanaPrincipal.datos.add(cliente);
+        }
     }
 
     @Override
     public void mostrarVehiculos(List<Vehiculo> vehiculos) {
-
+        for(Vehiculo vehiculo: vehiculos){
+            VentanaPrincipal.datos.add(vehiculo);
+        }
     }
 
     @Override
