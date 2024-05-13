@@ -4,6 +4,9 @@ import javafx.stage.Stage;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.*;
 import org.iesalandalus.programacion.tallermecanico.modelo.negocio.ficheros.Trabajos;
 import org.iesalandalus.programacion.tallermecanico.ventanas.LanzadoraVentanaPrincipal;
+import org.iesalandalus.programacion.tallermecanico.ventanas.controladores.InsertarCliente;
+import org.iesalandalus.programacion.tallermecanico.ventanas.controladores.InsertarVehiculo;
+import org.iesalandalus.programacion.tallermecanico.ventanas.controladores.LeerMatricula;
 import org.iesalandalus.programacion.tallermecanico.ventanas.controladores.VentanaPrincipal;
 import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Controlador;
 import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Controladores;
@@ -11,7 +14,10 @@ import org.iesalandalus.programacion.tallermecanico.vista.eventos.Evento;
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.GestorEventos;
 import org.iesalandalus.programacion.tallermecanico.vista.texto.Vista;
 
+import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +26,12 @@ public class VistaGrafica implements Vista {
     private static VistaGrafica instancia;
 
     private Controlador ventanaPrincipal;
+
+    private InsertarCliente insertarCliente;
+
+    private InsertarVehiculo insertarVehiculo;
+
+    private LeerMatricula leerMatricula;
 
     private final GestorEventos gestorEventos = new GestorEventos(Evento.values());
 
@@ -48,9 +60,15 @@ public class VistaGrafica implements Vista {
     }
 
     @Override
-    public Cliente leerCliente() {
-        Controlador ventanaInsetarCliente = Controladores.get("/vistas/InsertarCliente.fxml", "Insertar Cliente", ventanaPrincipal.getEscenario());
-        ventanaInsetarCliente.getEscenario().show();
+    public Cliente leerCliente(){
+        insertarCliente = (InsertarCliente) Controladores.get("/vistas/InsertarCliente.fxml", "Insertar Cliente", ventanaPrincipal.getEscenario());
+        insertarCliente.limpiarCampos();
+        insertarCliente.getEscenario().showAndWait();
+        if(insertarCliente.esCerrado){
+            System.out.println(insertarCliente.getCliente());
+        }else{
+            throw new IllegalArgumentException("Operación cancelada por el usuario");
+        }
         return null;
     }
 
@@ -71,11 +89,23 @@ public class VistaGrafica implements Vista {
 
     @Override
     public Vehiculo leerVehiculo() {
+        insertarVehiculo = (InsertarVehiculo) Controladores.get("/vistas/InsertarVehiculo.fxml", "Insertar Vehiculo", ventanaPrincipal.getEscenario());
+        insertarVehiculo.limpiarCampos();
+        insertarVehiculo.getEscenario().showAndWait();
+        if(insertarVehiculo.esCerrado){
+            System.out.println(insertarVehiculo.getVehiculo());
+        }else{
+            throw new IllegalArgumentException("Operación cancelada por el usuario");
+        }
         return null;
     }
 
     @Override
     public Vehiculo leerVehiculoMatricula() {
+        leerMatricula = (LeerMatricula) Controladores.get("/vistas/LeerMatricula.fxml", "Insertar Vehiculo", ventanaPrincipal.getEscenario());
+        leerMatricula.limpiarCampos();
+        leerMatricula.getEscenario().showAndWait();
+        System.out.println(leerMatricula.getVehiculo());
         return null;
     }
 
@@ -146,20 +176,17 @@ public class VistaGrafica implements Vista {
 
     @Override
     public void mostrarClientes(List<Cliente> clientes) {
-        for(Cliente cliente: clientes){
-            VentanaPrincipal.datos.add(cliente);
-        }
+        VentanaPrincipal.datos = new ArrayList<>(clientes);
     }
 
     @Override
     public void mostrarVehiculos(List<Vehiculo> vehiculos) {
-        for(Vehiculo vehiculo: vehiculos){
-            VentanaPrincipal.datos.add(vehiculo);
-        }
+        VentanaPrincipal.datos = new ArrayList<>(vehiculos);
     }
 
     @Override
     public void mostrarTrabajos(List<Trabajo> trabajos) {
+        VentanaPrincipal.datos = new ArrayList<>(trabajos);
 
     }
 

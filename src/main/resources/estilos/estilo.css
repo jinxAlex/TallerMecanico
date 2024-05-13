@@ -1,0 +1,17 @@
+.fondo{
+
+}
+
+.valido {
+    -fx-border-width: 0;
+    -fx-border-color: green;
+    -fx-focus-color: green;
+    -fx-border-radius: 5;
+}
+
+.invalido {
+    -fx-border-width: 0;
+    -fx-border-color: red;
+    -fx-focus-color: red;
+    -fx-border-radius: 5;
+}
