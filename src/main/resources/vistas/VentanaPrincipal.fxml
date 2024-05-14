@@ -29,7 +29,7 @@
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin></Button>
-            <Button mnemonicParsing="false">
+            <Button mnemonicParsing="false" onAction="#mostrarMenuTrabajo">
                <graphic>
                   <ImageView fx:id="btImagenTrabajos" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
@@ -55,35 +55,12 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="btUno" mnemonicParsing="false">
-                     <graphic>
-                        <ImageView fx:id="btImagenUno" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic></Button>
-                  <Button fx:id="btDos" mnemonicParsing="false" GridPane.rowIndex="1">
-                     <graphic>
-                        <ImageView fx:id="btImagenDos" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                  </Button>
-                  <Button fx:id="btTres" mnemonicParsing="false" GridPane.columnIndex="1">
-                     <graphic>
-                        <ImageView fx:id="btImagenTres" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                  </Button>
-                  <Button fx:id="btCuatro" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <graphic>
-                        <ImageView fx:id="btImagenCuatro" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                  </Button>
-                  <Button fx:id="btCinco" mnemonicParsing="false" GridPane.columnIndex="2">
-                     <graphic>
-                        <ImageView fx:id="btImagenCinco" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                  </Button>
-                  <Button fx:id="btSeis" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <graphic>
-                        <ImageView fx:id="btImagenSeis" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                  </Button>
+                  <Button fx:id="btUno" mnemonicParsing="false" />
+                  <Button fx:id="btDos" mnemonicParsing="false" GridPane.rowIndex="1" />
+                  <Button fx:id="btTres" mnemonicParsing="false" GridPane.columnIndex="1" />
+                  <Button fx:id="btCuatro" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button fx:id="btCinco" mnemonicParsing="false" GridPane.columnIndex="2" />
+                  <Button fx:id="btSeis" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <Separator prefWidth="200.0" />

@@ -1,31 +1,37 @@
 package org.iesalandalus.programacion.tallermecanico.ventanas.controladores;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Trabajo;
+import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
+import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Controlador;
+import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Controladores;
+import org.iesalandalus.programacion.tallermecanico.vista.eventos.Evento;
+import org.iesalandalus.programacion.tallermecanico.vista.grafica.VistaGrafica;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Trabajo;
-import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
-import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Controlador;
-import org.iesalandalus.programacion.tallermecanico.vista.eventos.Evento;
-import org.iesalandalus.programacion.tallermecanico.vista.grafica.VistaGrafica;
-
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.image.Image;
-import javafx.scene.control.TableView;
-import javafx.scene.control.Tooltip;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
-
 public class VentanaPrincipal extends Controlador {
 
-    public static List<Object> datos = new ArrayList<>();
+    public static List<Object> clientes = new ArrayList<>();
+
+    public static List<Object> vehiculos = new ArrayList<>();
+
+    public static List<Object> trabajos = new ArrayList<>();
+
+    public static InsertarTrabajo insertarTrabajo;
+
 
     @FXML
     private Button btCinco;
@@ -37,28 +43,10 @@ public class VentanaPrincipal extends Controlador {
     private Button btDos;
 
     @FXML
-    private ImageView btImagenCinco;
-
-    @FXML
     private ImageView btImagenCliente;
 
     @FXML
-    private ImageView btImagenCuatro;
-
-    @FXML
-    private ImageView btImagenDos;
-
-    @FXML
-    private ImageView btImagenSeis;
-
-    @FXML
     private ImageView btImagenTrabajos;
-
-    @FXML
-    private ImageView btImagenTres;
-
-    @FXML
-    private ImageView btImagenUno;
 
     @FXML
     private ImageView btImagenVehiculos;
@@ -81,6 +69,17 @@ public class VentanaPrincipal extends Controlador {
 
     private static final Image TRABAJOS = new Image(VentanaPrincipal.class.getResourceAsStream("/imagenes/trabajos/trabajos.png"),50, 50, true, true);
 
+    @FXML
+    void initialize(){
+        btImagenCliente.setImage(CLIENTES);
+        btImagenVehiculos.setImage(VEHICULOS);
+        btImagenTrabajos.setImage(TRABAJOS);
+        VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.LISTAR_CLIENTES);
+        VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.LISTAR_VEHICULOS);
+        VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.LISTAR_TRABAJOS);
+        mostrarMenuCliente();
+    }
+
 
     private void ocultarBotones(Button ... botones){
         for(Button boton: botones){
@@ -97,55 +96,68 @@ public class VentanaPrincipal extends Controlador {
 
             boton.setVisible(true);
             boton.setTooltip(new Tooltip(parametros[0]));
-            boton.setGraphic(new ImageView(new Image(VentanaPrincipal.class.getResourceAsStream(String.format("/imagenes/%s", parametros[1])), 50, 50, true, true)));
+            boton.setGraphic(new ImageView(new Image(VentanaPrincipal.class.getResourceAsStream(String.format("/imagenes/%s", parametros[1])), 40, 40, true, true)));
 
         }
     }
 
-    @FXML
-    void initialize(){
-        btImagenCliente.setImage(CLIENTES);
-        btImagenVehiculos.setImage(VEHICULOS);
-        btImagenTrabajos.setImage(TRABAJOS);
-        mostrarMenuCliente();
-    }
 
     public void mostrarTabla(List<Object> lista){
         ObservableList<Object> rellenarTabla = FXCollections.observableArrayList(lista);
         tabla.setItems(rellenarTabla);
     }
 
-    private void mostrarClientes(){
-        VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.LISTAR_CLIENTES);
-        mostrarTabla(datos);
-    }
-
-    private void mostrarVehiculos(){
-        VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.LISTAR_VEHICULOS);
-        mostrarTabla(datos);
-    }
-
-    private void mostrarTrabajos() {
-        VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.LISTAR_TRABAJOS);
-        mostrarTabla(datos);
-    }
-
     private void insertarCliente() {
         VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.INSERTAR_CLIENTE);
-    }
-
-
-    private void insertarVehiculo() {
-        VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.INSERTAR_VEHICULO);
+        mostrarClientes();
     }
 
     private void borrarCliente() {
         VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.BORRAR_CLIENTE);
+        mostrarClientes();
+    }
+
+    private void mostrarClientes(){
+        mostrarTabla(clientes);
+    }
+
+    private void modificarCliente(){
+        VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.MODIFICAR_CLIENTE);
+        mostrarClientes();
+    }
+
+    private void insertarVehiculo() {
+        VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.INSERTAR_VEHICULO);
+        mostrarVehiculos();
     }
 
     private void borrarVehiculo() {
         VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.BORRAR_VEHICULO);
+        mostrarVehiculos();
     }
+
+    private void mostrarVehiculos(){
+        mostrarTabla(vehiculos);
+    }
+
+
+    private void insertarTrabajo() {
+        insertarTrabajo = (InsertarTrabajo) Controladores.get("/vistas/InsertarTrabajo.fxml", "Insertar Trabajo", this.getEscenario());
+        insertarTrabajo.getEscenario().showAndWait();
+    }
+
+    private void borrarTrabajo() {}
+
+    private void anadirHoras() {}
+
+    private void anadirPrecio() {}
+
+    private void cerrarTrabajo() {}
+
+    private void mostrarTrabajos() {
+        mostrarTabla(trabajos);
+    }
+
 
     @FXML
     void mostrarMenuCliente() {
@@ -172,15 +184,15 @@ public class VentanaPrincipal extends Controlador {
         TableColumn<Object, String> columnaTelefono = new TableColumn<>("Teléfono");
         columnaTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
 
-        mostrarClientes();
-
         tabla.getColumns().add(columnaDni);
         tabla.getColumns().add(columnaNombre);
         tabla.getColumns().add(columnaTelefono);
 
-        btUno.setOnAction(e -> insertarCliente());
-        btUno.setOnAction(e -> borrarCliente());
+        mostrarClientes();
 
+        btUno.setOnAction(e -> insertarCliente());
+        btDos.setOnAction(e -> borrarCliente());
+        btTres.setOnAction(e -> modificarCliente());
         btCuatro.setOnAction(e -> mostrarClientes());
 
     }
@@ -232,9 +244,12 @@ public class VentanaPrincipal extends Controlador {
 
         ocultarBotones(btUno, btDos, btTres, btCuatro,btCinco,btSeis);
         Map<Button, String[]> mapaBotonesTrabajo= Map.ofEntries(
-                Map.entry(btUno, new String[]{"Insertar trabajo", "vehiculos/insertarVehiculo.png"}),
-                Map.entry(btDos, new String[]{"Borrar trabajo", "clientes/borrarCliente.png"}),
-                Map.entry(btTres, new String[]{"Listar trabajos", "listar.png"})
+                Map.entry(btUno, new String[]{"Insertar trabajo", "listar.png"}),
+                Map.entry(btDos, new String[]{"Borrar trabajo", "listar.png"}),
+                Map.entry(btTres, new String[]{"Añadir horas", "listar.png"}),
+                Map.entry(btCuatro, new String[]{"Añadir precio material", "listar.png"}),
+                Map.entry(btCinco, new String[]{"Cerrar trabajo", "listar.png"}),
+                Map.entry(btSeis, new String[]{"Listar trabajos", "listar.png"})
         );
 
         mostrarBotones(mapaBotonesTrabajo);
@@ -259,11 +274,15 @@ public class VentanaPrincipal extends Controlador {
 
         mostrarTrabajos();
 
-        btUno.setOnAction(e -> insertarVehiculo());
-
-        btTres.setOnAction(e -> mostrarVehiculos());
+        btUno.setOnAction(e -> insertarTrabajo());
+        btDos.setOnAction(e -> borrarTrabajo());
+        btTres.setOnAction(e -> anadirHoras());
+        btCuatro.setOnAction(e -> anadirPrecio());
+        btCinco.setOnAction(e -> cerrarTrabajo());
+        btSeis.setOnAction(e -> mostrarTrabajos());
 
     }
+
 
 
 

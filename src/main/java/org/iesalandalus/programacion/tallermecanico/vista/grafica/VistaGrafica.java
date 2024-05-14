@@ -1,23 +1,16 @@
 package org.iesalandalus.programacion.tallermecanico.vista.grafica;
 
-import javafx.stage.Stage;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.*;
-import org.iesalandalus.programacion.tallermecanico.modelo.negocio.ficheros.Trabajos;
 import org.iesalandalus.programacion.tallermecanico.ventanas.LanzadoraVentanaPrincipal;
-import org.iesalandalus.programacion.tallermecanico.ventanas.controladores.InsertarCliente;
-import org.iesalandalus.programacion.tallermecanico.ventanas.controladores.InsertarVehiculo;
-import org.iesalandalus.programacion.tallermecanico.ventanas.controladores.LeerMatricula;
-import org.iesalandalus.programacion.tallermecanico.ventanas.controladores.VentanaPrincipal;
+import org.iesalandalus.programacion.tallermecanico.ventanas.controladores.*;
 import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Controlador;
 import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Controladores;
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.Evento;
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.GestorEventos;
 import org.iesalandalus.programacion.tallermecanico.vista.texto.Vista;
 
-import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +25,8 @@ public class VistaGrafica implements Vista {
     private InsertarVehiculo insertarVehiculo;
 
     private LeerMatricula leerMatricula;
+
+    private LeerDni leerDni;
 
     private final GestorEventos gestorEventos = new GestorEventos(Evento.values());
 
@@ -61,20 +56,31 @@ public class VistaGrafica implements Vista {
 
     @Override
     public Cliente leerCliente(){
+        Cliente cliente;
         insertarCliente = (InsertarCliente) Controladores.get("/vistas/InsertarCliente.fxml", "Insertar Cliente", ventanaPrincipal.getEscenario());
         insertarCliente.limpiarCampos();
         insertarCliente.getEscenario().showAndWait();
         if(insertarCliente.esCerrado){
-            System.out.println(insertarCliente.getCliente());
+            cliente = insertarCliente.getCliente();
+            VentanaPrincipal.clientes.add(cliente);
         }else{
             throw new IllegalArgumentException("Operación cancelada por el usuario");
         }
-        return null;
+        return cliente;
     }
 
     @Override
     public Cliente leerClienteDni() {
-        return null;
+        Cliente cliente;
+        leerDni = (LeerDni) Controladores.get("/vistas/LeerDni.fxml", "Leer DNI", ventanaPrincipal.getEscenario());
+        leerDni.limpiarCampos();
+        leerDni.getEscenario().showAndWait();
+        if(leerDni.esCerrado){
+            cliente = leerDni.getCliente();
+        }else{
+            throw new IllegalArgumentException("Operación cancelada por el usuario");
+        }
+        return cliente;
     }
 
     @Override
@@ -89,24 +95,31 @@ public class VistaGrafica implements Vista {
 
     @Override
     public Vehiculo leerVehiculo() {
+        Vehiculo vehiculo;
         insertarVehiculo = (InsertarVehiculo) Controladores.get("/vistas/InsertarVehiculo.fxml", "Insertar Vehiculo", ventanaPrincipal.getEscenario());
         insertarVehiculo.limpiarCampos();
         insertarVehiculo.getEscenario().showAndWait();
-        if(insertarVehiculo.esCerrado){
-            System.out.println(insertarVehiculo.getVehiculo());
+        if(leerMatricula.esCerrado){
+            vehiculo = insertarVehiculo.getVehiculo();
+            VentanaPrincipal.vehiculos.add(vehiculo);
         }else{
             throw new IllegalArgumentException("Operación cancelada por el usuario");
         }
-        return null;
+        return vehiculo;
     }
 
     @Override
     public Vehiculo leerVehiculoMatricula() {
+        Vehiculo vehiculo;
         leerMatricula = (LeerMatricula) Controladores.get("/vistas/LeerMatricula.fxml", "Insertar Vehiculo", ventanaPrincipal.getEscenario());
         leerMatricula.limpiarCampos();
         leerMatricula.getEscenario().showAndWait();
-        System.out.println(leerMatricula.getVehiculo());
-        return null;
+        if(leerMatricula.esCerrado){
+            vehiculo = leerMatricula.getVehiculo();
+        }else{
+            throw new IllegalArgumentException("Operación cancelada por el usuario");
+        }
+        return vehiculo;
     }
 
     @Override
@@ -176,18 +189,17 @@ public class VistaGrafica implements Vista {
 
     @Override
     public void mostrarClientes(List<Cliente> clientes) {
-        VentanaPrincipal.datos = new ArrayList<>(clientes);
+        VentanaPrincipal.clientes = new ArrayList<>(clientes);
     }
 
     @Override
     public void mostrarVehiculos(List<Vehiculo> vehiculos) {
-        VentanaPrincipal.datos = new ArrayList<>(vehiculos);
+        VentanaPrincipal.vehiculos = new ArrayList<>(vehiculos);
     }
 
     @Override
     public void mostrarTrabajos(List<Trabajo> trabajos) {
-        VentanaPrincipal.datos = new ArrayList<>(trabajos);
-
+        VentanaPrincipal.trabajos = new ArrayList<>(trabajos);
     }
 
     @Override
