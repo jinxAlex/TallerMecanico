@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="150.0" prefWidth="300.0" stylesheets="@../estilos/estilo.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.tallermecanico.ventanas.controladores.LeerDni">
+<VBox prefHeight="150.0" prefWidth="300.0" styleClass="fondo" stylesheets="@../estilos/estilo.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.tallermecanico.ventanas.controladores.LeerDni">
    <children>
-      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" stylesheets="@../estilos/estilo.css">
          <children>
             <Label text="Dni:">
                <font>
@@ -20,7 +20,7 @@
                   <Insets bottom="20.0" left="20.0" right="5.0" top="20.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="tfDni" prefWidth="150.0">
+            <TextField fx:id="tfDni" prefWidth="150.0" styleClass="textField">
                <HBox.margin>
                   <Insets bottom="20.0" left="5.0" right="20.0" top="20.0" />
                </HBox.margin>
@@ -29,12 +29,12 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#cancelarAccion" text="CANCELAR">
+            <Button id="btCancelar" mnemonicParsing="false" onAction="#cancelarAccion" text="CANCELAR">
                <HBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#leerMatricula" text="LEER">
+            <Button id="btAceptar" mnemonicParsing="false" onAction="#leerMatricula" text="LEER">
                <HBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </HBox.margin>

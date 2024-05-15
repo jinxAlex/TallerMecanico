@@ -1,3 +1,27 @@
+.valido {
+    -fx-border-width: 0;
+    -fx-border-color: green;
+    -fx-focus-color: green;
+    -fx-border-radius: 5;
+}
+
+.invalido {
+    -fx-border-width: 0;
+    -fx-border-color: red;
+    -fx-focus-color: red;
+    -fx-border-radius: 5;
+}
+
+#btAceptar{
+    -fx-background-color: green;
+    -fx-border-radius: 5;
+}
+
+#btCancelar{
+    -fx-background-color: red;
+}
+
+
 .fondo{
     -fx-base: #ffe4c4;
 }
@@ -16,19 +40,7 @@
     -fx-border-radius: 5px;
 }
 
-.valido {
-    -fx-border-width: 0;
-    -fx-border-color: green;
-    -fx-focus-color: green;
-    -fx-border-radius: 5;
-}
 
-.invalido {
-    -fx-border-width: 0;
-    -fx-border-color: red;
-    -fx-focus-color: red;
-    -fx-border-radius: 5;
-}
 
 .aceptar{
 

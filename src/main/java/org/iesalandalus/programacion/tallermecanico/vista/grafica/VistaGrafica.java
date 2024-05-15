@@ -28,7 +28,7 @@ public class VistaGrafica implements Vista {
 
     private LeerDni leerDni;
 
-    private InsertarTrabajo insertarTrabajo;
+    private ModificarCliente modificarCliente;
 
     private final GestorEventos gestorEventos = new GestorEventos(Evento.values());
 
@@ -126,8 +126,14 @@ public class VistaGrafica implements Vista {
 
     @Override
     public Revision leerRevision() {
-        Revision revision =  (Revision) VentanaPrincipal.insertarTrabajo.getTrabajo();
-        VentanaPrincipal.trabajos.add(revision);
+        Revision revision = null;
+        if(VentanaPrincipal.borrarTrabajo.getEscenario().isShowing()){
+            revision = (Revision) VentanaPrincipal.borrarTrabajo.getTrabajo();
+            VentanaPrincipal.trabajos.remove(revision);
+        }else{
+            revision =  (Revision) VentanaPrincipal.insertarTrabajo.getTrabajo();
+            VentanaPrincipal.trabajos.add(revision);
+        }
         return revision;
     }
 

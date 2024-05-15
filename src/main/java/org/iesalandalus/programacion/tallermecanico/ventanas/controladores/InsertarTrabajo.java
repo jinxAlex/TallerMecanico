@@ -30,9 +30,9 @@ public class InsertarTrabajo extends Controlador {
 
     public Trabajo getTrabajo(){
         Trabajo trabajo = null;
-        if(cbTipoTrabajo.getValue().equals("MecÃ¡nico")){
+        if(cbTipoTrabajo.getValue().equals("Mecánico")){
             trabajo = new Mecanico(Cliente.get(tfDni.getText()), Vehiculo.get(tfMatricula.getText()),tfFechaInicio.getValue());
-        }else if(cbTipoTrabajo.getValue().equals("RevisiÃ³n")){
+        }else if(cbTipoTrabajo.getValue().equals("Revisión")){
             trabajo = new Revision(Cliente.get(tfDni.getText()), Vehiculo.get(tfMatricula.getText()),tfFechaInicio.getValue());
         }
         return trabajo;
@@ -40,8 +40,8 @@ public class InsertarTrabajo extends Controlador {
 
     @FXML
     void initialize(){
-        cbTipoTrabajo.setItems(FXCollections.observableArrayList("MecÃ¡nico","RevisiÃ³n"));
-        cbTipoTrabajo.setValue("MecÃ¡nico");
+        cbTipoTrabajo.setItems(FXCollections.observableArrayList("Mecánico","Revisión"));
+        cbTipoTrabajo.setValue("Mecánico");
     }
 
     @FXML
@@ -53,10 +53,10 @@ public class InsertarTrabajo extends Controlador {
 
     @FXML
     void crearTrabajo(ActionEvent event) {
-        if(cbTipoTrabajo.getValue().equals("MecÃ¡nico")){
+        if(cbTipoTrabajo.getValue().equals("Mecánico")){
             VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.INSERTAR_MECANICO);
-        }else if(cbTipoTrabajo.getValue().equals("RevisiÃ³n")){
-            VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.INSERTAR_MECANICO);
+        }else if(cbTipoTrabajo.getValue().equals("Revisión")){
+            VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.INSERTAR_REVISION);
         }
         Node origen = (Node) event.getSource();
         Stage escenario = (Stage) origen.getScene().getWindow();

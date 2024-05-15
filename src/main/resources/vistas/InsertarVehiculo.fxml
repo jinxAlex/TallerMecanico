@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox stylesheets="@../estilos/estilo.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.tallermecanico.ventanas.controladores.InsertarVehiculo">
+<VBox styleClass="fondo" stylesheets="@../estilos/estilo.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.tallermecanico.ventanas.controladores.InsertarVehiculo">
    <children>
       <GridPane alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0">
         <columnConstraints>
@@ -39,17 +39,17 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="tfMarca" maxWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="LEFT">
+            <TextField fx:id="tfMarca" maxWidth="200.0" styleClass="textField" GridPane.columnIndex="1" GridPane.halignment="LEFT">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="tfModelo" maxWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+            <TextField fx:id="tfModelo" maxWidth="200.0" styleClass="textField" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="tfMatricula" maxWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+            <TextField fx:id="tfMatricula" maxWidth="100.0" styleClass="textField" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
@@ -58,12 +58,12 @@
       </GridPane>
       <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#cancelarAccion" text="CANCELAR">
+            <Button id="btCancelar" mnemonicParsing="false" onAction="#cancelarAccion" text="CANCELAR">
                <HBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#crearVehiculo" text="INSERTAR">
+            <Button id="btAceptar" mnemonicParsing="false" onAction="#crearVehiculo" text="INSERTAR">
                <HBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </HBox.margin>

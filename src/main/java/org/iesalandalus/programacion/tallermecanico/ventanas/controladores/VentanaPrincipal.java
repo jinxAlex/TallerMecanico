@@ -4,17 +4,18 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.WindowEvent;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Trabajo;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Controlador;
 import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Controladores;
+import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Dialogos;
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.Evento;
 import org.iesalandalus.programacion.tallermecanico.vista.grafica.VistaGrafica;
 
@@ -32,6 +33,11 @@ public class VentanaPrincipal extends Controlador {
 
     public static InsertarTrabajo insertarTrabajo;
 
+    public static BorrarTrabajo borrarTrabajo;
+
+
+    @FXML
+    private VBox raiz;
 
     @FXML
     private Button btCinco;
@@ -69,6 +75,27 @@ public class VentanaPrincipal extends Controlador {
 
     private static final Image TRABAJOS = new Image(VentanaPrincipal.class.getResourceAsStream("/imagenes/trabajos/trabajos.png"),50, 50, true, true);
 
+    public void inicializar(){
+        getEscenario().setOnCloseRequest(e -> cerrar(e));
+    }
+
+    public void cerrar(WindowEvent event) {
+        if(Dialogos.mostrarDialogoConfirmacion("Cerrar","Estas seguro de que deseas salir?",this.getEscenario())){
+            getEscenario().close();
+            VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.SALIR);
+        }else{
+            event.consume();
+        }
+    }
+
+    @FXML
+    void salir() {
+        if(Dialogos.mostrarDialogoConfirmacion("Cerrar","Estas seguro de que deseas salir?",this.getEscenario())){
+            getEscenario().close();
+            VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.SALIR);
+        }
+    }
+
     @FXML
     void initialize(){
         btImagenCliente.setImage(CLIENTES);
@@ -79,6 +106,8 @@ public class VentanaPrincipal extends Controlador {
         VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.LISTAR_TRABAJOS);
         mostrarMenuCliente();
     }
+
+
 
 
     private void ocultarBotones(Button ... botones){
@@ -97,7 +126,6 @@ public class VentanaPrincipal extends Controlador {
             boton.setVisible(true);
             boton.setTooltip(new Tooltip(parametros[0]));
             boton.setGraphic(new ImageView(new Image(VentanaPrincipal.class.getResourceAsStream(String.format("/imagenes/%s", parametros[1])), 40, 40, true, true)));
-
         }
     }
 
@@ -144,10 +172,14 @@ public class VentanaPrincipal extends Controlador {
     private void insertarTrabajo() {
         insertarTrabajo = (InsertarTrabajo) Controladores.get("/vistas/InsertarTrabajo.fxml", "Insertar Trabajo", this.getEscenario());
         insertarTrabajo.getEscenario().showAndWait();
-
+        mostrarTrabajos();
     }
 
-    private void borrarTrabajo() {}
+    private void borrarTrabajo() {
+        borrarTrabajo = (BorrarTrabajo) Controladores.get("/vistas/BorrarTrabajo.fxml", "Borrar Trabajo", this.getEscenario());
+        borrarTrabajo.getEscenario().showAndWait();
+        mostrarTrabajos();
+    }
 
     private void anadirHoras() {}
 
@@ -288,3 +320,4 @@ public class VentanaPrincipal extends Controlador {
 
 
 }
+

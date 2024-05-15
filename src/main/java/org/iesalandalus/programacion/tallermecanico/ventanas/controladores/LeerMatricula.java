@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Controlador;
+import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Dialogos;
 
 public class LeerMatricula extends Controlador {
 
@@ -22,6 +23,10 @@ public class LeerMatricula extends Controlador {
 
     public void limpiarCampos(){
         tfMatricula.setText("");
+    }
+
+    private void comprobarCampos(){
+
     }
 
     @FXML
