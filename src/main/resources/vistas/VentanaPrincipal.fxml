@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox fx:id="raiz" styleClass="fondo" stylesheets="@../estilos/estilo.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.tallermecanico.ventanas.controladores.VentanaPrincipal">
    <children>
       <MenuBar>
@@ -62,7 +61,7 @@
                </children>
             </VBox>
             <Separator orientation="VERTICAL" prefHeight="200.0" />
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0">
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
                <children>
                   <GridPane alignment="CENTER" prefHeight="200.0">
                     <columnConstraints>
@@ -84,10 +83,11 @@
                         <Button fx:id="btCuatro" mnemonicParsing="false" styleClass="botones" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Button fx:id="btCinco" mnemonicParsing="false" styleClass="botones" GridPane.columnIndex="2" />
                         <Button fx:id="btSeis" mnemonicParsing="false" styleClass="botones" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Button fx:id="btSiete" mnemonicParsing="false" styleClass="botones" GridPane.columnIndex="3" />
                      </children>
                   </GridPane>
                   <Separator prefWidth="200.0" />
-                  <TableView fx:id="tabla" prefHeight="350.0" prefWidth="600.0" />
+                  <TableView id="tabla" fx:id="tabla" prefHeight="350.0" prefWidth="700.0" stylesheets="@../estilos/estilo.css" />
                </children>
             </VBox>
          </children>

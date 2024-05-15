@@ -1,3 +1,7 @@
+#tabla .table-column {
+  -fx-alignment: CENTER;
+}
+
 .valido {
     -fx-border-width: 0;
     -fx-border-color: green;
@@ -13,12 +17,15 @@
 }
 
 #btAceptar{
-    -fx-background-color: green;
+    -fx-background-color: #6aaf7d;
     -fx-border-radius: 5;
+    -fx-border-color: green;
 }
 
 #btCancelar{
-    -fx-background-color: red;
+    -fx-background-color: #c4342d;
+    -fx-border-radius: 5;
+    -fx-border-color: red;
 }
 
 

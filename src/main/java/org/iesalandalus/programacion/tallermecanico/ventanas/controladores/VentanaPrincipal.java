@@ -8,9 +8,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.WindowEvent;
+import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Mecanico;
+import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Revision;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Trabajo;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Controlador;
@@ -35,18 +36,28 @@ public class VentanaPrincipal extends Controlador {
 
     public static BorrarTrabajo borrarTrabajo;
 
+    public static MostrarEstadisticas mostrarEstadisticas;
 
     @FXML
-    private VBox raiz;
+    private Button btUno;
 
     @FXML
-    private Button btCinco;
+    private Button btDos;
+
+    @FXML
+    private Button btTres;
 
     @FXML
     private Button btCuatro;
 
     @FXML
-    private Button btDos;
+    private Button btCinco;
+
+    @FXML
+    private Button btSeis;
+
+    @FXML
+    private Button btSiete;
 
     @FXML
     private ImageView btImagenCliente;
@@ -56,15 +67,6 @@ public class VentanaPrincipal extends Controlador {
 
     @FXML
     private ImageView btImagenVehiculos;
-
-    @FXML
-    private Button btSeis;
-
-    @FXML
-    private Button btTres;
-
-    @FXML
-    private Button btUno;
 
     @FXML
     private TableView<Object> tabla = new TableView<>();
@@ -79,23 +81,6 @@ public class VentanaPrincipal extends Controlador {
         getEscenario().setOnCloseRequest(e -> cerrar(e));
     }
 
-    public void cerrar(WindowEvent event) {
-        if(Dialogos.mostrarDialogoConfirmacion("Cerrar","Estas seguro de que deseas salir?",this.getEscenario())){
-            getEscenario().close();
-            VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.SALIR);
-        }else{
-            event.consume();
-        }
-    }
-
-    @FXML
-    void salir() {
-        if(Dialogos.mostrarDialogoConfirmacion("Cerrar","Estas seguro de que deseas salir?",this.getEscenario())){
-            getEscenario().close();
-            VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.SALIR);
-        }
-    }
-
     @FXML
     void initialize(){
         btImagenCliente.setImage(CLIENTES);
@@ -107,8 +92,22 @@ public class VentanaPrincipal extends Controlador {
         mostrarMenuCliente();
     }
 
+    public void cerrar(WindowEvent event) {
+        if(Dialogos.mostrarDialogoConfirmacion("Cerrar","¿Estas seguro de que deseas salir?",this.getEscenario())){
+            getEscenario().close();
+            VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.SALIR);
+        }else{
+            event.consume();
+        }
+    }
 
-
+    @FXML
+    void salir() {
+        if(Dialogos.mostrarDialogoConfirmacion("Cerrar","¿Estas seguro de que deseas salir?",this.getEscenario())){
+            getEscenario().close();
+            VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.SALIR);
+        }
+    }
 
     private void ocultarBotones(Button ... botones){
         for(Button boton: botones){
@@ -128,7 +127,6 @@ public class VentanaPrincipal extends Controlador {
             boton.setGraphic(new ImageView(new Image(VentanaPrincipal.class.getResourceAsStream(String.format("/imagenes/%s", parametros[1])), 40, 40, true, true)));
         }
     }
-
 
     public void mostrarTabla(List<Object> lista){
         ObservableList<Object> rellenarTabla = FXCollections.observableArrayList(lista);
@@ -187,6 +185,11 @@ public class VentanaPrincipal extends Controlador {
 
     private void cerrarTrabajo() {}
 
+    private void mostrarEstadisticas() {
+        mostrarEstadisticas = (MostrarEstadisticas) Controladores.get("/vistas/MostrarEstadisticas.fxml", "Mostrar Estadísticas", this.getEscenario());
+        mostrarEstadisticas.getEscenario().showAndWait();
+    }
+
     private void mostrarTrabajos() {
         mostrarTabla(trabajos);
     }
@@ -197,7 +200,7 @@ public class VentanaPrincipal extends Controlador {
         tabla.getColumns().clear();
         tabla.getItems().clear();
 
-        ocultarBotones(btUno, btDos, btTres, btCuatro,btCinco,btSeis);
+        ocultarBotones(btUno, btDos, btTres, btCuatro,btCinco,btSeis,btSiete);
 
         Map<Button, String[]> mapaBotonesClientes = Map.ofEntries(
                 Map.entry(btUno, new String[]{"Insertar cliente", "clientes/insertarCliente.png"}),
@@ -230,14 +233,12 @@ public class VentanaPrincipal extends Controlador {
 
     }
 
-
-
     @FXML
     void mostrarMenuVehiculo() {
         tabla.getColumns().clear();
         tabla.getItems().clear();
 
-        ocultarBotones(btUno, btDos, btTres, btCuatro,btCinco,btSeis);
+        ocultarBotones(btUno, btDos, btTres, btCuatro,btCinco,btSeis,btSiete);
         Map<Button, String[]> mapaBotonesVehiculos = Map.ofEntries(
                 Map.entry(btUno, new String[]{"Insertar vehiculo", "vehiculos/insertarVehiculo.png"}),
                 Map.entry(btDos, new String[]{"Borrar vehiculo", "vehiculos/borrarVehiculo.png"}),
@@ -275,14 +276,15 @@ public class VentanaPrincipal extends Controlador {
         tabla.getColumns().clear();
         tabla.getItems().clear();
 
-        ocultarBotones(btUno, btDos, btTres, btCuatro,btCinco,btSeis);
+        ocultarBotones(btUno, btDos, btTres, btCuatro,btCinco,btSeis,btSiete);
         Map<Button, String[]> mapaBotonesTrabajo= Map.ofEntries(
-                Map.entry(btUno, new String[]{"Insertar trabajo", "listar.png"}),
-                Map.entry(btDos, new String[]{"Borrar trabajo", "listar.png"}),
-                Map.entry(btTres, new String[]{"Añadir horas", "listar.png"}),
+                Map.entry(btUno, new String[]{"Insertar trabajo", "trabajos/insertarTrabajo.png"}),
+                Map.entry(btDos, new String[]{"Borrar trabajo", "trabajos/borrarTrabajo.png"}),
+                Map.entry(btTres, new String[]{"Añadir horas", "trabajos/anadirHoras.png"}),
                 Map.entry(btCuatro, new String[]{"Añadir precio material", "listar.png"}),
                 Map.entry(btCinco, new String[]{"Cerrar trabajo", "listar.png"}),
-                Map.entry(btSeis, new String[]{"Listar trabajos", "listar.png"})
+                Map.entry(btSeis, new String[]{"Mostrar estadísticas", "listar.png"}),
+                Map.entry(btSiete, new String[]{"Listar trabajos", "listar.png"})
         );
 
         mostrarBotones(mapaBotonesTrabajo);
@@ -294,6 +296,29 @@ public class VentanaPrincipal extends Controlador {
         columnaMatricula.setCellValueFactory(e -> {Object obj = e.getValue();
             Trabajo trabajo = (Trabajo) obj; return new SimpleStringProperty(trabajo.getVehiculo().matricula());});
 
+        TableColumn<Object, String> columnaTipoTrabajo = new TableColumn<>("Tipo trabajo");
+        columnaTipoTrabajo.setCellValueFactory( e -> {
+            Object obj = e.getValue();
+            String tipo = "";
+            if(obj instanceof Mecanico){
+                tipo = "Mecánico";
+            }else if (obj instanceof Revision){
+                tipo = "Revisión";
+            }
+            return new SimpleStringProperty(tipo);
+        });
+
+        TableColumn<Object, String> columnaPrecioMaterial = new TableColumn<>("Precio Material");
+        columnaPrecioMaterial.setCellValueFactory( e -> {
+            Object obj = e.getValue();
+            String precio = "0.0";
+            if (obj instanceof Mecanico) {
+                float cantidad = ((Mecanico) obj).getPrecioMaterial();
+                precio = String.valueOf(cantidad);
+            }
+            return new SimpleStringProperty(precio + " €");
+        });
+
         TableColumn<Object, String> columnaFechaInicio = new TableColumn<>("Fecha Inicio");
         columnaFechaInicio.setCellValueFactory(new PropertyValueFactory<>("fechaInicio"));
 
@@ -302,8 +327,10 @@ public class VentanaPrincipal extends Controlador {
 
         tabla.getColumns().add(columnaDni);
         tabla.getColumns().add(columnaMatricula);
+        tabla.getColumns().add(columnaTipoTrabajo);
         tabla.getColumns().add(columnaFechaInicio);
         tabla.getColumns().add(columnaFechaFin);
+        tabla.getColumns().add(columnaPrecioMaterial);
 
         mostrarTrabajos();
 
@@ -312,7 +339,8 @@ public class VentanaPrincipal extends Controlador {
         btTres.setOnAction(e -> anadirHoras());
         btCuatro.setOnAction(e -> anadirPrecio());
         btCinco.setOnAction(e -> cerrarTrabajo());
-        btSeis.setOnAction(e -> mostrarTrabajos());
+        btSeis.setOnAction(e -> mostrarEstadisticas());
+        btSiete.setOnAction(e -> mostrarTrabajos());
 
     }
 

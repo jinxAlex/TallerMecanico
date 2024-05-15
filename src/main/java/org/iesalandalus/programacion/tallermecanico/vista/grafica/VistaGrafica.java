@@ -12,6 +12,7 @@ import org.iesalandalus.programacion.tallermecanico.vista.texto.Vista;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class VistaGrafica implements Vista {
@@ -146,7 +147,11 @@ public class VistaGrafica implements Vista {
 
     @Override
     public LocalDate leerMes() {
-        return null;
+        LocalDate mes = null;
+        if(VentanaPrincipal.mostrarEstadisticas.getEscenario().isShowing()){
+            mes = VentanaPrincipal.mostrarEstadisticas.getMes();
+        }
+        return mes;
     }
 
     @Override
@@ -216,6 +221,8 @@ public class VistaGrafica implements Vista {
 
     @Override
     public void mostrarEstadisticasMensuales(Map<TipoTrabajo, Integer> estadisticas) {
-
+        if(VentanaPrincipal.mostrarEstadisticas.getEscenario().isShowing()){
+           VentanaPrincipal.mostrarEstadisticas.mostrarGrafico(estadisticas);
+        }
     }
 }
