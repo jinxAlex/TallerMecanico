@@ -1,5 +1,19 @@
 .fondo{
+    -fx-base: #ffe4c4;
+}
 
+.botones{
+    -fx-border-color: blue;
+	-fx-border-radius: 5;
+	-fx-background-color: #cce6ff;
+	-fx-background-radius: 5;
+}
+
+.textField{
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #000000;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
 }
 
 .valido {
@@ -14,4 +28,8 @@
     -fx-border-color: red;
     -fx-focus-color: red;
     -fx-border-radius: 5;
+}
+
+.aceptar{
+
 }

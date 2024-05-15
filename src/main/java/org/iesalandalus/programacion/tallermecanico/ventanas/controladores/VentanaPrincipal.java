@@ -144,6 +144,7 @@ public class VentanaPrincipal extends Controlador {
     private void insertarTrabajo() {
         insertarTrabajo = (InsertarTrabajo) Controladores.get("/vistas/InsertarTrabajo.fxml", "Insertar Trabajo", this.getEscenario());
         insertarTrabajo.getEscenario().showAndWait();
+
     }
 
     private void borrarTrabajo() {}

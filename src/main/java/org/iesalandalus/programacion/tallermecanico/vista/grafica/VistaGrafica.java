@@ -28,6 +28,8 @@ public class VistaGrafica implements Vista {
 
     private LeerDni leerDni;
 
+    private InsertarTrabajo insertarTrabajo;
+
     private final GestorEventos gestorEventos = new GestorEventos(Evento.values());
 
     public static VistaGrafica getInstancia(){
@@ -124,12 +126,16 @@ public class VistaGrafica implements Vista {
 
     @Override
     public Revision leerRevision() {
-        return null;
+        Revision revision =  (Revision) VentanaPrincipal.insertarTrabajo.getTrabajo();
+        VentanaPrincipal.trabajos.add(revision);
+        return revision;
     }
 
     @Override
     public Mecanico leerMecanico() {
-        return null;
+        Mecanico mecanico = (Mecanico) VentanaPrincipal.insertarTrabajo.getTrabajo();
+        VentanaPrincipal.trabajos.add(mecanico);
+        return mecanico;
     }
 
     @Override
