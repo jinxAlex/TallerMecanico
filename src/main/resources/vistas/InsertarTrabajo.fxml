@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox stylesheets="@../estilos/estilo.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.tallermecanico.ventanas.controladores.InsertarTrabajo">
+<VBox styleClass="fondo" stylesheets="@../estilos/estilo.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.tallermecanico.ventanas.controladores.InsertarTrabajo">
    <children>
       <GridPane alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0">
         <columnConstraints>
@@ -51,17 +51,17 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
             </Label>
-            <TextField fx:id="tfDni" maxWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="LEFT">
+            <TextField fx:id="tfDni" maxWidth="100.0" styleClass="textField" GridPane.columnIndex="1" GridPane.halignment="LEFT">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="tfMatricula" maxWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+            <TextField fx:id="tfMatricula" maxWidth="100.0" styleClass="textField" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
             </TextField>
-            <DatePicker fx:id="tfFechaInicio" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <DatePicker fx:id="tfFechaInicio" styleClass="textField" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
@@ -74,7 +74,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
             </Label>
-            <ChoiceBox fx:id="cbTipoTrabajo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <ChoiceBox fx:id="cbTipoTrabajo" prefWidth="150.0" styleClass="textField" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
@@ -88,7 +88,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#crearTrabajo" text="INSERTAR">
+            <Button mnemonicParsing="false" onAction="#crearTrabajo" styleClass="invalido" stylesheets="@../estilos/estilo.css" text="INSERTAR">
                <HBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </HBox.margin>
