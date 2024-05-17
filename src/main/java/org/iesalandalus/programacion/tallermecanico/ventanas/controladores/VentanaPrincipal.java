@@ -8,7 +8,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
 import javafx.stage.WindowEvent;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Mecanico;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Revision;
@@ -37,6 +36,8 @@ public class VentanaPrincipal extends Controlador {
     public static BorrarTrabajo borrarTrabajo;
 
     public static MostrarEstadisticas mostrarEstadisticas;
+
+    public static ModificarCliente modificarCliente;
 
     @FXML
     private Button btUno;
@@ -148,7 +149,9 @@ public class VentanaPrincipal extends Controlador {
     }
 
     private void modificarCliente(){
-        VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.MODIFICAR_CLIENTE);
+        modificarCliente = (ModificarCliente) Controladores.get("/vistas/ModificarCliente.fxml", "Modificar Cliente", this.getEscenario());
+        modificarCliente.getEscenario().showAndWait();
+
         mostrarClientes();
     }
 

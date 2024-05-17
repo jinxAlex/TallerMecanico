@@ -33,40 +33,41 @@ public class VistaGrafica implements Vista {
 
     private final GestorEventos gestorEventos = new GestorEventos(Evento.values());
 
-    public static VistaGrafica getInstancia(){
-        if(instancia == null){
+    public static VistaGrafica getInstancia() {
+        if (instancia == null) {
             instancia = new VistaGrafica();
         }
         return instancia;
     }
 
-    private VistaGrafica(){}
+    private VistaGrafica() {
+    }
 
 
     public void setVentanaPrincipal(Controlador ventanaPrincipal) {
         this.ventanaPrincipal = ventanaPrincipal;
     }
 
-    public Controlador getVentanaPrincipal(){
+    public Controlador getVentanaPrincipal() {
         return ventanaPrincipal;
     }
 
 
     @Override
-    public GestorEventos getGestorEventos(){
+    public GestorEventos getGestorEventos() {
         return gestorEventos;
     }
 
     @Override
-    public Cliente leerCliente(){
+    public Cliente leerCliente() {
         Cliente cliente;
         insertarCliente = (InsertarCliente) Controladores.get("/vistas/InsertarCliente.fxml", "Insertar Cliente", ventanaPrincipal.getEscenario());
         insertarCliente.limpiarCampos();
         insertarCliente.getEscenario().showAndWait();
-        if(insertarCliente.esCerrado){
+        if (insertarCliente.esCerrado) {
             cliente = insertarCliente.getCliente();
             VentanaPrincipal.clientes.add(cliente);
-        }else{
+        } else {
             throw new IllegalArgumentException("Operación cancelada por el usuario");
         }
         return cliente;
@@ -75,25 +76,38 @@ public class VistaGrafica implements Vista {
     @Override
     public Cliente leerClienteDni() {
         Cliente cliente;
-        leerDni = (LeerDni) Controladores.get("/vistas/LeerDni.fxml", "Leer DNI", ventanaPrincipal.getEscenario());
-        leerDni.limpiarCampos();
-        leerDni.getEscenario().showAndWait();
-        if(leerDni.esCerrado){
-            cliente = leerDni.getCliente();
-        }else{
-            throw new IllegalArgumentException("Operación cancelada por el usuario");
+        if (VentanaPrincipal.modificarCliente.getEscenario().isShowing()) {
+            cliente = VentanaPrincipal.modificarCliente.getClienteDni();
+        } else {
+            leerDni = (LeerDni) Controladores.get("/vistas/LeerDni.fxml", "Leer DNI", ventanaPrincipal.getEscenario());
+            leerDni.limpiarCampos();
+            leerDni.getEscenario().showAndWait();
+            if (leerDni.esCerrado) {
+                cliente = leerDni.getCliente();
+            } else {
+                throw new IllegalArgumentException("Operación cancelada por el usuario");
+            }
+
         }
         return cliente;
     }
 
     @Override
     public String leerNuevoNombre() {
-        return "";
+        String nombre = "";
+        if (VentanaPrincipal.modificarCliente.getEscenario().isShowing()) {
+            nombre = VentanaPrincipal.modificarCliente.getNuevoNombre();
+        }
+        return nombre;
     }
 
     @Override
     public String leerNuevoTelefono() {
-        return "";
+        String telefono = "";
+        if (VentanaPrincipal.modificarCliente.getEscenario().isShowing()) {
+            telefono = VentanaPrincipal.modificarCliente.getNuevoTelefono();
+        }
+        return telefono;
     }
 
     @Override
@@ -102,10 +116,10 @@ public class VistaGrafica implements Vista {
         insertarVehiculo = (InsertarVehiculo) Controladores.get("/vistas/InsertarVehiculo.fxml", "Insertar Vehiculo", ventanaPrincipal.getEscenario());
         insertarVehiculo.limpiarCampos();
         insertarVehiculo.getEscenario().showAndWait();
-        if(leerMatricula.esCerrado){
+        if (leerMatricula.esCerrado) {
             vehiculo = insertarVehiculo.getVehiculo();
             VentanaPrincipal.vehiculos.add(vehiculo);
-        }else{
+        } else {
             throw new IllegalArgumentException("Operación cancelada por el usuario");
         }
         return vehiculo;
@@ -117,9 +131,9 @@ public class VistaGrafica implements Vista {
         leerMatricula = (LeerMatricula) Controladores.get("/vistas/LeerMatricula.fxml", "Insertar Vehiculo", ventanaPrincipal.getEscenario());
         leerMatricula.limpiarCampos();
         leerMatricula.getEscenario().showAndWait();
-        if(leerMatricula.esCerrado){
+        if (leerMatricula.esCerrado) {
             vehiculo = leerMatricula.getVehiculo();
-        }else{
+        } else {
             throw new IllegalArgumentException("Operación cancelada por el usuario");
         }
         return vehiculo;
@@ -128,11 +142,11 @@ public class VistaGrafica implements Vista {
     @Override
     public Revision leerRevision() {
         Revision revision = null;
-        if(VentanaPrincipal.borrarTrabajo.getEscenario().isShowing()){
+        if (VentanaPrincipal.borrarTrabajo.getEscenario().isShowing()) {
             revision = (Revision) VentanaPrincipal.borrarTrabajo.getTrabajo();
             VentanaPrincipal.trabajos.remove(revision);
-        }else{
-            revision =  (Revision) VentanaPrincipal.insertarTrabajo.getTrabajo();
+        } else {
+            revision = (Revision) VentanaPrincipal.insertarTrabajo.getTrabajo();
             VentanaPrincipal.trabajos.add(revision);
         }
         return revision;
@@ -148,7 +162,7 @@ public class VistaGrafica implements Vista {
     @Override
     public LocalDate leerMes() {
         LocalDate mes = null;
-        if(VentanaPrincipal.mostrarEstadisticas.getEscenario().isShowing()){
+        if (VentanaPrincipal.mostrarEstadisticas.getEscenario().isShowing()) {
             mes = VentanaPrincipal.mostrarEstadisticas.getMes();
         }
         return mes;
@@ -191,7 +205,7 @@ public class VistaGrafica implements Vista {
 
     @Override
     public void mostrarCliente(Cliente cliente) {
-        
+
     }
 
     @Override
@@ -221,8 +235,8 @@ public class VistaGrafica implements Vista {
 
     @Override
     public void mostrarEstadisticasMensuales(Map<TipoTrabajo, Integer> estadisticas) {
-        if(VentanaPrincipal.mostrarEstadisticas.getEscenario().isShowing()){
-           VentanaPrincipal.mostrarEstadisticas.mostrarGrafico(estadisticas);
+        if (VentanaPrincipal.mostrarEstadisticas.getEscenario().isShowing()) {
+            VentanaPrincipal.mostrarEstadisticas.mostrarGrafico(estadisticas);
         }
     }
 }
