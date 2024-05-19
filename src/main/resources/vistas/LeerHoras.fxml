@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="150.0" prefWidth="350.0" styleClass="fondo" stylesheets="@../estilos/estilo.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.tallermecanico.ventanas.controladores.LeerMatricula">
+<VBox prefHeight="150.0" prefWidth="350.0" styleClass="fondo" stylesheets="@../estilos/estilo.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.tallermecanico.ventanas.controladores.LeerHoras">
    <children>
       <HBox alignment="CENTER" prefHeight="50.0" prefWidth="250.0">
          <children>
-            <Label text="Matrícula:">
+            <Label text="Número de horas:">
                <font>
                   <Font size="18.0" />
                </font>
@@ -20,7 +20,7 @@
                   <Insets bottom="20.0" left="20.0" right="5.0" top="20.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="tfMatricula" prefWidth="150.0" styleClass="textField">
+            <TextField fx:id="tfHoras" prefWidth="150.0" styleClass="textField">
                <HBox.margin>
                   <Insets bottom="20.0" left="5.0" right="20.0" top="20.0" />
                </HBox.margin>

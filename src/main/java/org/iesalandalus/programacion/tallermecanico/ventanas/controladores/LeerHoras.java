@@ -1,32 +1,20 @@
 package org.iesalandalus.programacion.tallermecanico.ventanas.controladores;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
+
 import javafx.scene.Node;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Controlador;
-import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Dialogos;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 
-public class LeerMatricula extends Controlador {
-
+public class LeerHoras extends Controlador {
     @FXML
-    private TextField tfMatricula;
+    private TextField tfHoras;
 
-    public boolean esCerrado = false;
-
-    public Vehiculo getVehiculo() {
-        return Vehiculo.get(tfMatricula.getText());
-    }
-
-
-    public void limpiarCampos(){
-        tfMatricula.setText("");
-    }
-
-    private void comprobarCampos(){
-
+    public int getHoras() {
+        return Integer.parseInt(tfHoras.getText());
     }
 
     @FXML
@@ -38,12 +26,13 @@ public class LeerMatricula extends Controlador {
 
     @FXML
     void leerMatricula(ActionEvent event) {
-        esCerrado = true;
-        if(getVehiculo() != null){
+        if(getHoras() > 0){
             Node origen = (Node) event.getSource();
             Stage escenario = (Stage) origen.getScene().getWindow();
             escenario.close();
+        }else{
+            cancelarAccion(event);
         }
-    }
 
+    }
 }

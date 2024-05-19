@@ -9,10 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.WindowEvent;
-import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Mecanico;
-import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Revision;
-import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Trabajo;
-import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
+import org.iesalandalus.programacion.tallermecanico.modelo.dominio.*;
 import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Controlador;
 import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Controladores;
 import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Dialogos;
@@ -151,8 +148,6 @@ public class VentanaPrincipal extends Controlador {
     private void modificarCliente(){
         modificarCliente = (ModificarCliente) Controladores.get("/vistas/ModificarCliente.fxml", "Modificar Cliente", this.getEscenario());
         modificarCliente.getEscenario().showAndWait();
-
-        mostrarClientes();
     }
 
     private void insertarVehiculo() {
@@ -182,7 +177,9 @@ public class VentanaPrincipal extends Controlador {
         mostrarTrabajos();
     }
 
-    private void anadirHoras() {}
+    private void anadirHoras() {
+        VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.ANADIR_HORAS_TRABAJO);
+    }
 
     private void anadirPrecio() {}
 

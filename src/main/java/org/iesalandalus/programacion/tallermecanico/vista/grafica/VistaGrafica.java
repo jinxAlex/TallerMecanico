@@ -5,6 +5,7 @@ import org.iesalandalus.programacion.tallermecanico.ventanas.LanzadoraVentanaPri
 import org.iesalandalus.programacion.tallermecanico.ventanas.controladores.*;
 import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Controlador;
 import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Controladores;
+import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Dialogos;
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.Evento;
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.GestorEventos;
 import org.iesalandalus.programacion.tallermecanico.vista.texto.Vista;
@@ -29,7 +30,7 @@ public class VistaGrafica implements Vista {
 
     private LeerDni leerDni;
 
-    private ModificarCliente modificarCliente;
+    private LeerHoras leerHoras;
 
     private final GestorEventos gestorEventos = new GestorEventos(Evento.values());
 
@@ -78,6 +79,7 @@ public class VistaGrafica implements Vista {
         Cliente cliente;
         if (VentanaPrincipal.modificarCliente.getEscenario().isShowing()) {
             cliente = VentanaPrincipal.modificarCliente.getClienteDni();
+            System.out.println(cliente);
         } else {
             leerDni = (LeerDni) Controladores.get("/vistas/LeerDni.fxml", "Leer DNI", ventanaPrincipal.getEscenario());
             leerDni.limpiarCampos();
@@ -106,6 +108,7 @@ public class VistaGrafica implements Vista {
         String telefono = "";
         if (VentanaPrincipal.modificarCliente.getEscenario().isShowing()) {
             telefono = VentanaPrincipal.modificarCliente.getNuevoTelefono();
+            System.out.println(telefono);
         }
         return telefono;
     }
@@ -170,7 +173,9 @@ public class VistaGrafica implements Vista {
 
     @Override
     public int leerHoras() {
-        return 0;
+        leerHoras = (LeerHoras) Controladores.get("/vistas/LeerHoras.fxml", "Leer Horas", ventanaPrincipal.getEscenario());
+        leerHoras.getEscenario().showAndWait();
+        return leerHoras.getHoras();
     }
 
     @Override
@@ -195,12 +200,17 @@ public class VistaGrafica implements Vista {
 
     @Override
     public Trabajo leerTrabajoVehiculo() {
-        return null;
+        return Trabajo.get(leerVehiculoMatricula());
     }
 
     @Override
     public void notificarResultado(Evento evento, String texto, boolean exito) {
-
+        System.out.println(evento + texto + exito);
+        if(exito){
+            Dialogos.mostrarDialogoInformacion(evento.toString(),texto,ventanaPrincipal.getEscenario());
+        }else {
+            Dialogos.mostrarDialogoError(evento.toString(),texto,ventanaPrincipal.getEscenario());
+        }
     }
 
     @Override
