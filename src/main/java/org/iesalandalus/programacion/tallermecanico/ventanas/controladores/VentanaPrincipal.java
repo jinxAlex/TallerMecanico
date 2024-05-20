@@ -77,7 +77,6 @@ public class VentanaPrincipal extends Controlador {
 
     public void inicializar(){
         getEscenario().setOnCloseRequest(e -> cerrar(e));
-        VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.LISTAR_TRABAJOS);
     }
 
     @FXML
@@ -85,6 +84,9 @@ public class VentanaPrincipal extends Controlador {
         btImagenCliente.setImage(IMAGEN_CLIENTES);
         btImagenVehiculos.setImage(IMAGEN_VEHICULOS);
         btImagenTrabajos.setImage(IMAGEN_TRABAJOS);
+        VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.LISTAR_CLIENTES);
+        VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.LISTAR_VEHICULOS);
+        VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.LISTAR_TRABAJOS);
         mostrarMenuCliente();
     }
 
