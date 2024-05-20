@@ -69,11 +69,11 @@ public class VentanaPrincipal extends Controlador {
     @FXML
     private TableView<Object> tabla = new TableView<>();
 
-    private static final Image CLIENTES = new Image(VentanaPrincipal.class.getResourceAsStream("/imagenes/clientes/clientes.png"), 50, 50, true, true);
+    private static final Image IMAGEN_CLIENTES = new Image(VentanaPrincipal.class.getResourceAsStream("/imagenes/clientes/clientes.png"), 50, 50, true, true);
 
-    private static final Image VEHICULOS = new Image(VentanaPrincipal.class.getResourceAsStream("/imagenes/vehiculos/vehiculos.png"),50, 50, true, true);
+    private static final Image IMAGEN_VEHICULOS = new Image(VentanaPrincipal.class.getResourceAsStream("/imagenes/vehiculos/vehiculos.png"),50, 50, true, true);
 
-    private static final Image TRABAJOS = new Image(VentanaPrincipal.class.getResourceAsStream("/imagenes/trabajos/trabajos.png"),50, 50, true, true);
+    private static final Image IMAGEN_TRABAJOS = new Image(VentanaPrincipal.class.getResourceAsStream("/imagenes/trabajos/trabajos.png"),50, 50, true, true);
 
     public void inicializar(){
         getEscenario().setOnCloseRequest(e -> cerrar(e));
@@ -81,9 +81,9 @@ public class VentanaPrincipal extends Controlador {
 
     @FXML
     void initialize(){
-        btImagenCliente.setImage(CLIENTES);
-        btImagenVehiculos.setImage(VEHICULOS);
-        btImagenTrabajos.setImage(TRABAJOS);
+        btImagenCliente.setImage(IMAGEN_CLIENTES);
+        btImagenVehiculos.setImage(IMAGEN_VEHICULOS);
+        btImagenTrabajos.setImage(IMAGEN_TRABAJOS);
         VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.LISTAR_CLIENTES);
         VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.LISTAR_VEHICULOS);
         VistaGrafica.getInstancia().getGestorEventos().notificar(Evento.LISTAR_TRABAJOS);
@@ -331,10 +331,10 @@ public class VentanaPrincipal extends Controlador {
         tabla.getColumns().add(columnaDni);
         tabla.getColumns().add(columnaMatricula);
         tabla.getColumns().add(columnaTipoTrabajo);
-        tabla.getColumns().add(columnaPrecioMaterial);
-        tabla.getColumns().add(columnaHoras);
         tabla.getColumns().add(columnaFechaInicio);
         tabla.getColumns().add(columnaFechaFin);
+        tabla.getColumns().add(columnaPrecioMaterial);
+        tabla.getColumns().add(columnaHoras);
 
 
         mostrarTrabajos();
