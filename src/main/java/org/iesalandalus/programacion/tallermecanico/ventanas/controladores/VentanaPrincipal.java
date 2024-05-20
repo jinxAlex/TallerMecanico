@@ -319,6 +319,9 @@ public class VentanaPrincipal extends Controlador {
             return new SimpleStringProperty(precio + " €");
         });
 
+        TableColumn<Object, String> columnaHoras = new TableColumn<>("Horas");
+        columnaHoras.setCellValueFactory(new PropertyValueFactory<>("horas"));
+
         TableColumn<Object, String> columnaFechaInicio = new TableColumn<>("Fecha Inicio");
         columnaFechaInicio.setCellValueFactory(new PropertyValueFactory<>("fechaInicio"));
 
@@ -328,9 +331,11 @@ public class VentanaPrincipal extends Controlador {
         tabla.getColumns().add(columnaDni);
         tabla.getColumns().add(columnaMatricula);
         tabla.getColumns().add(columnaTipoTrabajo);
+        tabla.getColumns().add(columnaPrecioMaterial);
+        tabla.getColumns().add(columnaHoras);
         tabla.getColumns().add(columnaFechaInicio);
         tabla.getColumns().add(columnaFechaFin);
-        tabla.getColumns().add(columnaPrecioMaterial);
+
 
         mostrarTrabajos();
 
@@ -343,9 +348,6 @@ public class VentanaPrincipal extends Controlador {
         btSiete.setOnAction(e -> mostrarTrabajos());
 
     }
-
-
-
 
 }
 
