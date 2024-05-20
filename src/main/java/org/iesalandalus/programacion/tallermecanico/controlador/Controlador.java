@@ -62,6 +62,7 @@ public class Controlador implements IControlador {
             }
         }catch (Exception e){
             vista.notificarResultado(evento,e.getMessage(),false);
+            e.printStackTrace();
         }
 
     }

@@ -246,7 +246,7 @@ public class Trabajos implements ITrabajos {
     }
 
     @Override
-    public Map<TipoTrabajo, Integer> inicialicarEstadisticas(){
+    public Map<TipoTrabajo, Integer> inicializarEstadisticas(){
         Map<TipoTrabajo, Integer> estadisticasMensuales = new EnumMap<>(TipoTrabajo.class);
         for(TipoTrabajo tipoTrabajo: TipoTrabajo.values()){
             estadisticasMensuales.put(tipoTrabajo,0);
@@ -256,7 +256,7 @@ public class Trabajos implements ITrabajos {
     @Override
     public Map<TipoTrabajo, Integer> getEstadisticasMensuales(LocalDate mes){
         Objects.requireNonNull(mes,"El mes no puede ser nulo.");
-        Map<TipoTrabajo, Integer> estadisticasMensuales = inicialicarEstadisticas();
+        Map<TipoTrabajo, Integer> estadisticasMensuales = inicializarEstadisticas();
         for(Trabajo trabajo: coleccionTrabajos){
             if(trabajo.getFechaInicio().getMonth() == mes.getMonth() && trabajo.getFechaInicio().getYear() == mes.getYear()){
                 TipoTrabajo tipoTrabajo = TipoTrabajo.get(trabajo);

@@ -1,5 +1,6 @@
 package org.iesalandalus.programacion.tallermecanico;
 
+import javafx.util.Pair;
 import org.iesalandalus.programacion.tallermecanico.controlador.Controlador;
 import org.iesalandalus.programacion.tallermecanico.controlador.IControlador;
 import org.iesalandalus.programacion.tallermecanico.modelo.FabricaModelo;
@@ -10,21 +11,26 @@ import org.iesalandalus.programacion.tallermecanico.vista.texto.Vista;
 
 public class Main {
     public static void main(String[] args) {
-        Vista vista = getVista(args);
-        Modelo modelo = FabricaModelo.CASCADA.crear(FabricaFuenteDatos.FICHEROS);
-        IControlador controlador = new Controlador(modelo, vista);
+        Pair<FabricaVista,FabricaFuenteDatos> fabricas = procesarArgumentos(args);
+        Modelo modelo = FabricaModelo.CASCADA.crear(fabricas.getValue());
+        IControlador controlador = new Controlador(modelo, fabricas.getKey().crear());
         controlador.comenzar();
     }
 
-    private static Vista getVista(String[] argumentos){
-        Vista vista = null;
-        for(int i = 0; i < argumentos.length; i++){
-            if(argumentos[i].equals("-vTexto")){
-                vista = FabricaVista.TEXTO.crear();
-            }else if(argumentos[i].equals("-vGrafica")){
-                vista = FabricaVista.GRAFICA.crear();
+    private static Pair<FabricaVista, FabricaFuenteDatos> procesarArgumentos(String[] argumentos){
+        FabricaVista vista = FabricaVista.GRAFICA;
+        FabricaFuenteDatos datos = FabricaFuenteDatos.MARIADB;
+        for(String argumento: argumentos){
+            if(argumento.equals("-vTexto")){
+                vista = FabricaVista.TEXTO;
+            }else if(argumento.equals("-vGrafica")){
+                vista = FabricaVista.GRAFICA;
+            }else if(argumento.equals("-fMariaDB")){
+                datos = FabricaFuenteDatos.MARIADB;
+            }else if(argumento.equals("-fFicheros")){
+                datos = FabricaFuenteDatos.FICHEROS;
             }
         }
-        return vista;
+        return new Pair<>(vista, datos);
     }
 }

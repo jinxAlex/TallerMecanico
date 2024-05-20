@@ -7,10 +7,8 @@ import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
 
 import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public interface ITrabajos {
 
@@ -26,7 +24,7 @@ public interface ITrabajos {
 
     void insertar(Trabajo trabajo) throws OperationNotSupportedException;
 
-    Map<TipoTrabajo, Integer> inicialicarEstadisticas();
+    Map<TipoTrabajo, Integer> inicializarEstadisticas();
 
     Map<TipoTrabajo, Integer> getEstadisticasMensuales(LocalDate mes);
 

@@ -87,7 +87,7 @@
                      </children>
                   </GridPane>
                   <Separator prefWidth="200.0" />
-                  <TableView id="tabla" fx:id="tabla" prefHeight="350.0" prefWidth="700.0" stylesheets="@../estilos/estilo.css" />
+                  <TableView id="tabla" fx:id="tabla" prefHeight="350.0" prefWidth="700.0" />
                </children>
             </VBox>
          </children>
