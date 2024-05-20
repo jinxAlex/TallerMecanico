@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `trabajos` (
 INSERT INTO tallerMecanico.clientes (nombre, dni, telefono) VALUES('Patricio Estrella', '11111111H', '950111111');
 INSERT INTO tallerMecanico.clientes (nombre, dni, telefono) VALUES('Bob Esponja', '11223344B', '950112233');
 
-INSERT INTO tallerMecanico.vehiculos (marca, modelo, matricula) VALUES('Seat', 'León', '1111BBB');
+INSERT INTO tallerMecanico.vehiculos (marca, modelo, matricula) VALUES('Seat', 'Leon', '1111BBB');
 INSERT INTO tallerMecanico.vehiculos (marca, modelo, matricula) VALUES('Scania', 'Citywide', '1234BCD');
 INSERT INTO tallerMecanico.vehiculos (marca, modelo, matricula) VALUES('Renault', 'Megane', '2222CCC');
 INSERT INTO tallerMecanico.vehiculos (marca, modelo, matricula) VALUES('Mercedes-Benz', 'eSprinter', '3333DDD');

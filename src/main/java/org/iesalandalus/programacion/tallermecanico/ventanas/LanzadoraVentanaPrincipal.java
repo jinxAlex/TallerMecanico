@@ -11,9 +11,9 @@ public class LanzadoraVentanaPrincipal extends Application{
         @Override
         public void start(Stage escenarioPrincipal) {
                 VentanaPrincipal ventanaPrincipal = (VentanaPrincipal) Controladores.get("/vistas/VentanaPrincipal.fxml", "Taller", null);
+                VistaGrafica.getInstancia().setVentanaPrincipal(ventanaPrincipal);
                 ventanaPrincipal.inicializar();
                 Dialogos.setHojaEstilos("/estilos/estilo.css");
-                VistaGrafica.getInstancia().setVentanaPrincipal(ventanaPrincipal);
                 ventanaPrincipal.getEscenario().show();
         }
 

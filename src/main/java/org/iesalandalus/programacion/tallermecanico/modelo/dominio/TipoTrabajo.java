@@ -3,8 +3,8 @@ package org.iesalandalus.programacion.tallermecanico.modelo.dominio;
 import java.util.Objects;
 
 public enum TipoTrabajo {
-    MECANICO("Mec√°nico"),
-    REVISION("Mec√°nico");
+    MECANICO("Mec·nico"),
+    REVISION("RevisiÛn");
 
     private final String nombre;
 
@@ -22,6 +22,11 @@ public enum TipoTrabajo {
         }
 
         return tipoTrabajo;
+    }
+
+    @Override
+    public String toString() {
+        return nombre;
     }
 
 }
