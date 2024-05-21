@@ -119,7 +119,7 @@ public class VistaGrafica implements Vista {
         insertarVehiculo = (InsertarVehiculo) Controladores.get("/vistas/InsertarVehiculo.fxml", "Insertar Vehiculo", ventanaPrincipal.getEscenario());
         insertarVehiculo.limpiarCampos();
         insertarVehiculo.getEscenario().showAndWait();
-        if (leerMatricula.esCerrado) {
+        if (insertarVehiculo.esCerrado) {
             vehiculo = insertarVehiculo.getVehiculo();
             VentanaPrincipal.vehiculos.add(vehiculo);
         } else {
