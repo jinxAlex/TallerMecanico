@@ -44,7 +44,6 @@ public class VistaGrafica implements Vista {
     private VistaGrafica() {
     }
 
-
     public void setVentanaPrincipal(Controlador ventanaPrincipal) {
         this.ventanaPrincipal = ventanaPrincipal;
     }
