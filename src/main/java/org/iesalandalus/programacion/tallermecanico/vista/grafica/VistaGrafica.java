@@ -132,6 +132,7 @@ public class VistaGrafica implements Vista {
     public Vehiculo leerVehiculoMatricula() {
         Vehiculo vehiculo;
         leerMatricula = (LeerMatricula) Controladores.get("/vistas/LeerMatricula.fxml", "Insertar Vehiculo", ventanaPrincipal.getEscenario());
+        leerMatricula.addHojaEstilos("/estilos/estilo.css");
         leerMatricula.limpiarCampos();
         leerMatricula.getEscenario().showAndWait();
         if (leerMatricula.esCerrado) {

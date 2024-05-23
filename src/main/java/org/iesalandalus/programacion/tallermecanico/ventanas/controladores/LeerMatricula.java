@@ -20,14 +20,23 @@ public class LeerMatricula extends Controlador {
         return Vehiculo.get(tfMatricula.getText());
     }
 
+    @FXML
+    void initialize(){
+        tfMatricula.textProperty().addListener(((observable, oldValue, newValue) -> comprobarCampos(newValue)));
+    }
+
 
     public void limpiarCampos(){
         tfMatricula.setText("");
     }
 
-    private void comprobarCampos(){
-
-    }
+        private void comprobarCampos(String nuevtoTexto){
+            if(nuevtoTexto.matches(Vehiculo.ER_MATRICULA)){
+                tfMatricula.getStyleClass().add("valido");
+            }else{
+                tfMatricula.getStyleClass().add("invalido");
+            }
+        }
 
     @FXML
     void cancelarAccion(ActionEvent event) {

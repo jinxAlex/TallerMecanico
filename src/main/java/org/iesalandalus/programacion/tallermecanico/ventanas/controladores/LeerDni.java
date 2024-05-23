@@ -3,7 +3,6 @@ package org.iesalandalus.programacion.tallermecanico.ventanas.controladores;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente;
-import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.tallermecanico.ventanas.utilidades.Controlador;
 
 import javafx.event.ActionEvent;
